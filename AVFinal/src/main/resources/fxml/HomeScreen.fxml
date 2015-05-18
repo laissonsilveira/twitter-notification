@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-background-color 0xbfbfbfff?>
+<?scenebuilder-stylesheet ../styles/avfinal.css?>
+
+<AnchorPane prefHeight="500.0" prefWidth="830.0" stylesheets="/styles/avfinal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.avfinal.view.control.main.HomeScreenController">
+   <children>
+     <GridPane prefHeight="499.0000999999975" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <children>
+         <GridPane alignment="CENTER_LEFT" minWidth="-Infinity" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+           <children>
+             <Label alignment="CENTER_RIGHT" text="Professor(a): " textAlignment="RIGHT" textFill="#202020" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+             <TextField fx:id="professor" disable="true" prefWidth="635.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="0" />
+             <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Gerei: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+             <TextField fx:id="gerei" prefWidth="165.0" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+             <Label alignment="CENTER_RIGHT" text="Município: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+             <TextField fx:id="municipio" prefWidth="199.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                 <Insets right="5.0" fx:id="x1" />
+               </GridPane.margin>
+             </TextField>
+             <Label alignment="CENTER_RIGHT" text="Unid. Escolar: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+             <TextField fx:id="unidEscolar" prefWidth="316.0" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+             <Label alignment="CENTER_RIGHT" text="Curso: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+             <TextField fx:id="curso" prefWidth="635.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+          <Label alignment="CENTER_RIGHT" text="Disciplina: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+          <TextField fx:id="disciplina" prefWidth="235.0" GridPane.columnIndex="5" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+             <Label alignment="CENTER_RIGHT" text="Turno: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+          <TextField fx:id="turno" prefWidth="189.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="3" />
+          <Label alignment="CENTER_RIGHT" text="Série: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+          <TextField fx:id="serie" prefWidth="165.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+          <Label alignment="CENTER_RIGHT" text="Turma: " textAlignment="RIGHT" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+          <TextField fx:id="turma" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+             <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#saveGradebook" prefHeight="24.0" prefWidth="100.0" text="Adicionar" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+           </children>
+           <columnConstraints>
+             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="90.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="75.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="90.0" />
+           </columnConstraints>
+           <padding>
+             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+           </padding>
+           <rowConstraints>
+             <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+         </GridPane>
+         <TableView fx:id="tableGradebooks" cache="true" editable="true" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+           <columns>
+             <TableColumn fx:id="columnCurso" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" text="Curso" />
+             <TableColumn fx:id="columnTurno" maxWidth="143.0" minWidth="143.0" prefWidth="143.0" text="Turno" />
+             <TableColumn fx:id="columnSerie" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Série" />
+             <TableColumn fx:id="columnTurma" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Turma" />
+             <TableColumn fx:id="columnDisciplina" maxWidth="195.0" minWidth="195.0" prefWidth="195.0" text="Disciplina" />
+           </columns>
+         </TableView>
+         <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="810.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2">
+           <children>
+             <Button alignment="CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#openDiario" prefHeight="24.0" prefWidth="100.0" text="Abrir Diário" textAlignment="CENTER" wrapText="true">
+               <HBox.margin>
+                 <Insets />
+               </HBox.margin>
+             </Button>
+           </children>
+         </HBox>
+       </children>
+       <columnConstraints>
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="579.0" minWidth="10.0" prefWidth="455.0" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="616.0" minWidth="-Infinity" prefWidth="116.0" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="470.0" minWidth="-Infinity" prefWidth="109.0" />
+       </columnConstraints>
+       <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+       </padding>
+       <rowConstraints>
+         <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="407.0" minHeight="10.0" prefHeight="291.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+       </rowConstraints>
+     </GridPane>
+   </children>
+</AnchorPane>

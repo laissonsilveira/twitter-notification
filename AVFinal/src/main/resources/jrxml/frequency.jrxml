@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="frequency" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3de712e7-671f-41b9-9a61-4fea48bfc36b">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="237"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="LOGO_SC" class="java.net.URL"/>
+	<parameter name="BIMESTER" class="java.lang.String"/>
+	<parameter name="SHIFT" class="java.lang.String"/>
+	<parameter name="TEACHER" class="java.lang.String"/>
+	<parameter name="SCHOOL_UNIT" class="java.lang.String"/>
+	<parameter name="MUNICIPALITY" class="java.lang.String"/>
+	<parameter name="DISCIPLINE" class="java.lang.String"/>
+	<parameter name="CLASS" class="java.lang.String"/>
+	<parameter name="COURSE" class="java.lang.String"/>
+	<parameter name="SERIES" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="matriculation" class="java.lang.Long"/>
+	<field name="dateFreq" class="java.util.Date"/>
+	<field name="presence" class="java.lang.String"/>
+	<group name="Group1"/>
+	<group name="Group2"/>
+	<group name="Group3"/>
+	<group name="Group4"/>
+	<title>
+		<band height="60">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="60" uuid="1cd138ff-b129-4127-8315-cd53292863b6"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="329" y="30" width="170" height="30" uuid="6cdc62dc-bd67-42b1-988d-ea11b8aedccc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="329" y="0" width="170" height="30" uuid="94bfee18-186a-417c-b799-1bbc1624e8e6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="499" y="0" width="86" height="30" uuid="9632cf4b-d63a-4a40-83f4-6f21571d7bc5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="499" y="30" width="303" height="30" uuid="ea06cc91-0d7f-4747-a5b8-9e8e408ec9cb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="585" y="0" width="48" height="30" uuid="f01e861b-89be-4ee1-b8b4-95a02f9f09af"/>
+			</rectangle>
+			<image>
+				<reportElement mode="Transparent" x="1" y="1" width="58" height="59" uuid="3af10cc3-ce6a-4c84-aa9c-0f7f8dbb31ec"/>
+				<imageExpression><![CDATA[$P{LOGO_SC}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="59" y="0" width="270" height="15" uuid="6d9f2deb-1030-4364-84bd-c0873eb85361"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO DE SANTA CATARINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="15" width="270" height="15" uuid="aa0de2ba-6e51-41f4-88ae-420b6a075888"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DA EDUCAÇÃO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="30" width="270" height="15" uuid="56d618ff-9d62-46bf-9db9-ff7d8a7b039a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SCHOOL_UNIT} + "-" + $P{MUNICIPALITY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy" isBlankWhenNull="true">
+				<reportElement x="59" y="45" width="39" height="15" uuid="fcbe4345-6731-49ed-b27f-5101d96672c9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="45" width="10" height="15" uuid="f4a704c7-b7c9-417f-bab4-74bda4523120"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ - ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="45" width="84" height="15" uuid="c151d105-cd79-4fd7-88f2-4b312eca7d6e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BIMESTER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="45" width="137" height="15" uuid="d4d9e32c-b0b8-4557-8dcf-0bebde229720"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[FICHA DE FREQUÊNCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="0" width="170" height="15" uuid="bed10ac2-1695-4ecc-b0eb-b4db569d7fa2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Curso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="30" width="150" height="15" uuid="ddcffbd4-88d5-4dd0-ab88-adb9f5827dea"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Disciplina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="30" width="303" height="15" uuid="06a3dfa2-430e-4320-a093-d10edc811cb5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Professor(a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="0" width="86" height="15" uuid="d3fa7de5-5114-48ff-ac5c-6c77df1717ad"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Turno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="585" y="0" width="48" height="15" uuid="23c617ea-3052-48d9-96f2-3b914b41dfee"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Série]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="633" y="0" width="47" height="15" uuid="f15ab7c1-5c7e-41b6-9cb6-bf9c4d7a549d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Turma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="680" y="0" width="42" height="15" uuid="e3c9b631-da6b-4968-b159-ab7f3d4b00e2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Sala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="722" y="0" width="80" height="15" uuid="cd12dc6a-0226-45d1-9882-da987cce531d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Tipo Turma]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="329" y="15" width="170" height="15" uuid="6100c7a1-b6ca-4ccc-b572-76db11d06483"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COURSE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="15" width="86" height="15" uuid="c2530227-7637-4a62-a390-18304748c3da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SHIFT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="585" y="15" width="48" height="15" uuid="a82e1a3f-86f7-4caa-999c-9db398ff1615"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SERIES}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="329" y="45" width="170" height="15" uuid="9f455271-89be-4621-b16f-ca34a00c9e99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DISCIPLINE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="499" y="45" width="303" height="15" uuid="3dec0ab9-9284-4ee1-ae70-3f0723aa10fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TEACHER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="633" y="15" width="47" height="15" uuid="50b603c0-29b6-418c-b068-2422f2ecbf9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CLASS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="20" uuid="4223f812-d288-48e1-ada7-09e5fd58aa43"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="165" height="20" uuid="de4bb09c-5b7e-4abe-9eef-63d9415be4e0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Nome do Aluno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="80" height="20" uuid="4877fe98-0822-4ebd-9b9c-acd9ac3b233d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrícula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="39" uuid="e3fce4bf-0380-4022-87c5-ecfa6d5e16ae"/>
+			</rectangle>
+			<crosstab>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="802" height="40" uuid="9b16c85d-dc69-4d63-8691-c3d8d4f81277"/>
+				<rowGroup name="name" width="164">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{name}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement style="Crosstab Data Text" x="4" y="0" width="160" height="15" uuid="1a3b333e-ba24-4e0e-9122-817a5dd87903"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{name}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="matricula" width="80">
+					<bucket class="java.lang.Long">
+						<bucketExpression><![CDATA[$F{matriculation}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement style="Crosstab Data Text" x="5" y="0" width="75" height="15" uuid="d9e64be5-435f-4db6-b1e3-594b535aa5c6"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{matricula}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="dateFreq" height="15">
+					<bucket class="java.util.Date">
+						<bucketExpression><![CDATA[$F{dateFreq}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#FFFFFF" mode="Opaque">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField pattern="dd/MM" isBlankWhenNull="true">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="20" height="15" uuid="578de4e9-b2d4-44fd-8dd0-b94751e49c1d"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{dateFreq}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="presenceMeasure" class="java.lang.String">
+					<measureExpression><![CDATA[$F{presence}]]></measureExpression>
+				</measure>
+				<crosstabCell width="20" height="15">
+					<cellContents>
+						<box>
+							<pen lineWidth="1.0"/>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textField isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="20" height="15" uuid="2d21dcd2-c94a-4434-9c51-abdcbf40fbab"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{presenceMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="name">
+					<cellContents backcolor="#FFBFBF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="390d751e-f80d-48d9-b960-2d1e4630a898"/>
+							<textFieldExpression><![CDATA[$V{presenceMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="dateFreq">
+					<cellContents backcolor="#FFBFBF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="26f657e3-02c8-45bd-90ff-b36a36304ab1"/>
+							<textFieldExpression><![CDATA[$V{presenceMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="name" columnTotalGroup="dateFreq">
+					<cellContents backcolor="#FFBFBF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="a200f7de-8b76-4014-987e-50effabe79e2"/>
+							<textFieldExpression><![CDATA[$V{presenceMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="matricula">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="matricula" columnTotalGroup="dateFreq">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

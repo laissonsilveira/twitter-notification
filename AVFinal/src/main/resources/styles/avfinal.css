@@ -1,0 +1,96 @@
+.grid-pane {
+	-fx-background-color:  linear-gradient(lightgray, gray);
+}
+
+.text,.text-field,.combo-box,.table-view {
+	-fx-font-size: 11.0px;
+}
+
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #363636;
+    -fx-effect: dropshadow( gaussian , rgba(255.0,255.0,255.0,0.5) , 0.0,0.0,0.0,1.0 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#36648B, #87CEEB);
+}
+
+.button {
+	-fx-font-size: 10.0px;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#87CEEB, #36648B);
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+
+.buttonDelete {
+	-fx-background-color: transparent;
+}
+
+.buttonDelete:hover {
+	-fx-background-color: skyblue ;
+}
+
+#titulo {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+/*
+.tooltipMessage {
+	-fx-background-color: #FF6A6A; 
+	-fx-font-size: 11.0px; 
+	-fx-font-weight: bold; 
+	-fx-alignment: center;
+}
+ */
+
+/* 
+ * Style das grids
+ */
+.table-view:focused .table-row-cell:filled:focused:selected {
+	 -fx-background-color: steelblue ;
+}
+
+/* Selected row when table not focused */
+.table-row-cell:filled:focused:selected {
+	-fx-background-color: skyblue ;
+}
+
+/* Row hovered */
+.table-view:row-selection .table-row-cell:filled:hover {
+	-fx-background-color: skyblue ;
+}
+
+/* Selected row hovered */
+.table-view:focused .table-row-cell:filled:focused:selected:hover {
+	-fx-background-color: skyblue ;
+}
+
+/* Selected row hovered when table not focused */
+.table-view:row-selection .table-row-cell:filled:focused:hover {
+	-fx-background-color: steelblue ;
+}
+
+/* Grid de resultados */
+.cell-approved {
+	-fx-text-fill: rgb(0.0,0.0,255.0);
+	-fx-font-weight: bold;
+}
+
+.cell-disapproved {
+	-fx-text-fill: rgb(255.0,0.0,0.0);
+	-fx-font-weight: bold;
+}
+
+.big-decimal-field {
+    -fx-skin: "jfxtras.labs.internal.scene.control.skin.BigDecimalFieldSkin";
+}
+
+.CalendarPickerControlSkin { 
+	-fxx-show-weeknumbers: NO;
+}

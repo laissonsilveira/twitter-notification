@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
+<?import br.com.avfinal.view.component.*?>
+<?scenebuilder-background-color 0xbfbfbfff?>
+<?scenebuilder-stylesheet ../../../../target/classes/styles/avfinal.css?>
+
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="424.0" prefWidth="810.0" styleClass="/styles/avfinal.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <GridPane fx:id="gridFrequency" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="398.0" prefWidth="786.0">
+      <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <children>
+                  <Separator>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <GridPane alignment="CENTER_LEFT">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label contentDisplay="RIGHT" text="Qtde. Aulas: " GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cmbQtdClass" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        	<items>
+						        <FXCollections fx:factory="observableArrayList">
+						            <String fx:value="1" />
+						            <String fx:value="2" />
+						            <String fx:value="3" />
+						            <String fx:value="4" />
+						        </FXCollections>
+						    </items>
+                        </ComboBox>
+                        <Label contentDisplay="RIGHT" text="Bimestre: " />
+                        <ComboBox fx:id="cmbBimester" GridPane.columnIndex="1" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </GridPane>
+                  <Separator>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Separator>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="281.0" text="NOVO ALUNO" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin></Label>
+            <Label text="Nome:">
+              <VBox.margin>
+                <Insets left="15.0" fx:id="x1" />
+              </VBox.margin>
+            </Label>
+            <TextField fx:id="nm_student" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Nome do aluno...">
+              <VBox.margin>
+                <Insets bottom="5.0" left="10.0" fx:id="x6" />
+              </VBox.margin>
+            </TextField>
+            <Label text="Matrícula: ">
+              <VBox.margin>
+                <Insets left="15.0" fx:id="x2" />
+              </VBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+              <children>
+                <TextField fx:id="matriculation" minHeight="-Infinity" prefHeight="26.0" prefWidth="150.0" promptText="Matricula do aluno...">
+                  <HBox.margin>
+                    <Insets left="10.0" fx:id="x6" />
+                  </HBox.margin>
+                </TextField>
+                <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddNewStudent" prefHeight="24.0" prefWidth="24.0" text="+" textAlignment="CENTER">
+                  <font>
+                    <Font name="System Bold" size="14.0" />
+                  </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                </Button>
+              </children>
+            </HBox>
+            <Separator>
+              <VBox.margin>
+                <Insets bottom="10.0" left="10.0" top="10.0" />
+              </VBox.margin>
+            </Separator>
+          </children>
+        </VBox>
+        <HBox alignment="BOTTOM_RIGHT" minHeight="-Infinity" prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+          <children>
+            <Button fx:id="btnSave" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSaveFrequency" prefHeight="24.0" prefWidth="100.0" text="Salvar" />
+          </children>
+        </HBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="786.0" minWidth="10.0" prefWidth="510.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="0.0" prefWidth="286.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="369.0" minHeight="10.0" prefHeight="202.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</fx:root>

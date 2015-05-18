@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
+<?import br.com.avfinal.view.component.*?>
+<?scenebuilder-background-color 0xbfbfbfff?>
+<?scenebuilder-classpath-element ../../../../target/classes?>
+<?scenebuilder-stylesheet ../../../../target/classes/styles/avfinal.css?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" styleClass="/styles/avfinal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="424.0" prefWidth="810.0">
+  <children>
+    <GridPane alignment="CENTER" prefHeight="393.0" prefWidth="783.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" fx:id="gridPaneTabAssessment">
+      <children>
+        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+          <children>
+            <Label text="Bimestre:" />
+            <ComboBox fx:id="cmbBoxBimesterAval" prefWidth="120.0">
+              <HBox.margin>
+                <Insets left="5.0" fx:id="x2" />
+              </HBox.margin>
+            </ComboBox>
+          </children>
+          <padding>
+            <Insets left="10.0" fx:id="x6" />
+          </padding>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+          <children>
+            <RadioButton fx:id="rdAssessment" mnemonicParsing="false" selected="true" text="Avaliação">
+              <toggleGroup>
+                <ToggleGroup fx:id="tglGrTypeAval" />
+              </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rdRecovery" mnemonicParsing="false" text="Recuperação" toggleGroup="$tglGrTypeAval">
+              <HBox.margin>
+                <Insets left="20.0" />
+              </HBox.margin>
+            </RadioButton>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+          <children>
+            <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#onAddAssessment" prefHeight="24.0" prefWidth="100.0" text="Adicionar" />
+          </children>
+          <padding>
+            <Insets right="10.0" />
+          </padding>
+        </HBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="167.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="52.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="0.0" prefWidth="275.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="315.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="305.0" minHeight="0.0" prefHeight="296.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</fx:root>

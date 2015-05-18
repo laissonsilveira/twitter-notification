@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cover" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3de712e7-671f-41b9-9a61-4fea48bfc36b">
+	<property name="ireport.zoom" value="1.0000000000000437"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO_SC" class="java.net.URL"/>
+	<parameter name="BIMESTER" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="turno" class="java.lang.String"/>
+	<field name="professor" class="java.lang.String"/>
+	<field name="unidEscolar" class="java.lang.String"/>
+	<field name="municipio" class="java.lang.String"/>
+	<field name="disciplina" class="java.lang.String"/>
+	<field name="turma" class="java.lang.String"/>
+	<field name="serie" class="java.lang.String"/>
+	<field name="gerei" class="java.lang.String"/>
+	<field name="curso" class="java.lang.String"/>
+	<group name="Group1"/>
+	<group name="Group2"/>
+	<group name="Group3"/>
+	<group name="Group4"/>
+	<pageHeader>
+		<band height="150">
+			<line>
+				<reportElement x="-1" y="-1" width="804" height="1" uuid="6546cb94-e43c-42b6-8fa0-1c581179d0e3"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="-1" width="1" height="151" uuid="7baf8867-cc51-402c-9e02-144db93ec67c"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="802" y="-1" width="1" height="151" uuid="0472e31f-089b-44c8-8d47-17e87bab9600"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="89" width="802" height="20" uuid="d57eff20-3aed-44ab-a4a8-59f31df6a1e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DO ESTADO DA EDUCAÇÃO DE SANTA CATARINA]]></text>
+			</staticText>
+			<image>
+				<reportElement mode="Transparent" x="357" y="12" width="89" height="77" uuid="0e1ca1d0-c8f7-4553-84ba-94edaea5f3e1"/>
+				<imageExpression><![CDATA[$P{LOGO_SC}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="130" width="801" height="20" uuid="0b3995e2-d4d9-4d4a-834f-c97fb78fe25a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="109" width="801" height="21" uuid="98767d6b-833f-4f3f-88b0-c7f0fe13a7a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidEscolar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="405">
+			<line>
+				<reportElement x="-1" y="401" width="804" height="1" uuid="fdfe1932-f5ff-4ebc-b062-ea19031d1f47"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="802" y="0" width="1" height="402" uuid="e369e862-c43a-48b7-b0cc-8e94de37b44a"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="402" uuid="37b69813-ef2b-4062-9937-c0705c89e8c6"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="-1" y="0" width="802" height="264" uuid="4ad7239b-37fb-4a03-8cb1-aa316dac7d63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="66" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Diário de Classe]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="27" y="284" width="127" height="30" uuid="d48b3cbb-ac5c-40eb-a048-8c3595262930"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="314" width="127" height="30" uuid="485a5bf3-042d-4b60-92b6-4a356a9a03a1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="27" y="344" width="127" height="30" uuid="4d540840-fe5c-4015-92f5-73f148273d99"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="154" y="284" width="446" height="30" uuid="25aee196-a178-4409-aac9-36f01b8f9e33"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="154" y="314" width="162" height="30" uuid="ff7dbfa6-7227-4786-a754-5a0b850d4ed2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="154" y="344" width="292" height="30" uuid="b072cae5-a966-43d3-a5ac-4c0852b752ee"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="600" y="284" width="174" height="30" uuid="afabc393-a2a8-40c9-84b7-cf680818ba3f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="314" width="284" height="30" uuid="a6f7d039-83f8-4d23-9d4c-f466acfb8e4b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="600" y="314" width="174" height="30" uuid="bad62366-493f-4a65-a54a-4759a5afb6b4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="446" y="344" width="154" height="30" uuid="c44ea526-c939-46ea-8b5c-50e5579e3dea"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="600" y="344" width="174" height="30" uuid="6ad7278b-1594-40b0-a4c5-6e28c9d0160c"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="27" y="264" width="747" height="20" uuid="32dc0985-6986-4266-8930-2cd70dea69fe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{BIMESTER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="284" width="127" height="30" uuid="edec3be6-10fc-4bff-a029-fd5168451aa7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ UNIDADE ESCOLAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="284" width="174" height="15" uuid="8acfe713-e61d-4064-90e6-10bb24cf5609"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ GEREI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="314" width="127" height="15" uuid="6a4191fc-e055-4bf4-a0dc-500472fbc6f6"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ ANO LETIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="314" width="284" height="15" uuid="8cab19bd-aa3d-4362-a165-8e6138128370"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ EDUCAÇÃO BÁSICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="344" width="127" height="30" uuid="491b2e0c-85d9-45a3-bd3b-9caed57fe782"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ PROFESSOR (A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="344" width="154" height="15" uuid="761f8ca1-ee11-4472-ae12-b6ad36631071"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ SÉRIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="314" width="174" height="15" uuid="bd056a1a-aab9-4670-a2dd-f634cf166382"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ DISCIPLINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="344" width="174" height="15" uuid="91e88706-97d2-488f-97bb-220c2b96d965"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ TURMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="314" width="162" height="15" uuid="d5d4e391-b67a-417c-a255-b208aba69aec"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[ TURNO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="154" y="329" width="162" height="15" uuid="96fdbe38-6d78-4566-80b7-381b4321edd8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="160" y="284" width="440" height="30" uuid="2955925a-1aaf-418f-891c-99fca177f8d6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidEscolar}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="600" y="359" width="174" height="15" uuid="dc89eefb-01b2-4ee2-b196-fa30c809fcb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{turma}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="600" y="329" width="174" height="15" uuid="7ce8c9d1-a2f5-4bec-95b5-d6ee78cdc2a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{disciplina}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="160" y="344" width="286" height="30" uuid="edd2a50f-1d72-4c9f-92ea-62acc32844dc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{professor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="316" y="329" width="284" height="15" uuid="8693c4e0-a452-4976-83b8-3f4867741c0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="359" width="154" height="15" uuid="42336804-bb35-4c78-8f27-0efa0eeadb34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy" isBlankWhenNull="true">
+				<reportElement x="27" y="329" width="127" height="15" uuid="651aee2f-fbe8-4ab8-b88f-a8ae7ac8d4ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="299" width="174" height="15" uuid="fc7e39b6-2be5-4454-8bc2-e6caad1eb512"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gerei}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

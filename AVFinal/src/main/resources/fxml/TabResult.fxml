@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
+<?import br.com.avfinal.view.component.*?>
+<?scenebuilder-background-color 0xbfbfbfff?>
+<?scenebuilder-stylesheet ../../../../target/classes/styles/avfinal.css?>
+<?import javafx.scene.control.TextField?>
+
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="424.0" prefWidth="810.0" styleClass="/styles/avfinal.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+    	<GridPane layoutX="1.0" layoutY="1.0" prefHeight="419.0" prefWidth="809.9998779296875">
+            <children>
+              <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="331.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <children>
+                  <Label text="Pesquisar Aluno:">
+                    <VBox.margin>
+                      <Insets left="15.0" fx:id="x1" />
+                    </VBox.margin>
+                  </Label>
+                  <TextField fx:id="filterField" minWidth="-Infinity" prefWidth="300.0">
+                    <VBox.margin>
+                      <Insets left="10.0" fx:id="x6" />
+                    </VBox.margin>
+                  </TextField>
+                </children>
+              </VBox>
+              <TableView fx:id="tableResults" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                <columns>
+                  <TableColumn id="columnStudentResult" fx:id="columnStudentResult" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" text="Aluno" />
+                  <TableColumn fx:id="columnBimester01" maxWidth="67.0" minWidth="67.0" prefWidth="67.0" text="1ºBim." />
+                  <TableColumn fx:id="columnBimester02" maxWidth="67.0" minWidth="67.0" prefWidth="67.0" text="2ºBim." />
+                  <TableColumn fx:id="columnBimester03" maxWidth="67.0" minWidth="67.0" prefWidth="67.0" text="3ºBim." />
+                  <TableColumn fx:id="columnBimester04" maxWidth="67.0" minWidth="67.0" prefWidth="67.0" text="4ºBim." />
+                  <TableColumn fx:id="columnFinal" maxWidth="67.0" minWidth="67.0" prefWidth="67.0" text="Final" />
+                  <TableColumn fx:id="columnRecovery" maxWidth="67.0" minWidth="67.0" prefWidth="67.0" text="Recup." />
+                  <TableColumn id="columnApproved" fx:id="columnApproved" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Aprovado" />
+                </columns>
+                <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </GridPane.margin>
+              </TableView>
+              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <children>
+                  <Button fx:id="btnRecupFinal" alignment="CENTER" contentDisplay="CENTER" disable="true" minHeight="-Infinity" mnemonicParsing="false" onAction="#onOpenRecovery" prefHeight="24.0" prefWidth="140.0" text="Recuperação Final">
+                    <HBox.margin>
+                      <Insets fx:id="x3" />
+                    </HBox.margin>
+                  </Button>
+                </children>
+                <padding>
+                  <Insets bottom="10.0" right="10.0" />
+                </padding>
+              </HBox>
+              <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <children>
+                  <Button mnemonicParsing="false" onAction="#onCalculateAverage" prefHeight="24.0" prefWidth="120.0" text="Calcular Médias" />
+                </children>
+                <padding>
+                  <Insets bottom="5.0" right="10.0" />
+                </padding>
+              </HBox>
+            </children>
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="342.0" minWidth="10.0" prefWidth="325.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="487.0" minWidth="10.0" prefWidth="485.0" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+              <RowConstraints maxHeight="354.0" minHeight="10.0" prefHeight="335.0" vgrow="SOMETIMES" />
+              <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+          </GridPane>
+    </children>
+</fx:root>

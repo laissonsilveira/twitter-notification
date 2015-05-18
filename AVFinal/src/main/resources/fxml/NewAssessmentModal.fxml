@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?scenebuilder-stylesheet ../styles/avfinal.css?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="758.0" 
+	stylesheets="/styles/avfinal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.avfinal.view.control.gradebook.tabs.assessment.NewAssessmentController">
+  <children>
+    <GridPane alignment="CENTER" prefHeight="392.0" prefWidth="756.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+      <children>
+        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Label text="Bimestre:">
+              <VBox.margin>
+                <Insets left="15.0" fx:id="x1" />
+              </VBox.margin>
+            </Label>
+            <ComboBox fx:id="cmbBoxBimestreNewAval" minWidth="-Infinity" prefWidth="120.0">
+              <VBox.margin>
+                <Insets left="10.0" fx:id="x6" />
+              </VBox.margin>
+            </ComboBox>
+          </children>
+          <GridPane.margin>
+            <Insets fx:id="x3" />
+          </GridPane.margin>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0">
+          <children>
+            <Label text="Tipo de avaliação:">
+              <VBox.margin>
+                <Insets left="10.0" fx:id="x6" />
+              </VBox.margin>
+            </Label>
+            <ComboBox fx:id="cmbBoxTipAval" disable="true" prefWidth="163.0">
+              <VBox.margin>
+                <Insets left="5.0" fx:id="x4" />
+              </VBox.margin>
+            </ComboBox>
+          </children>
+          <GridPane.margin>
+            <Insets fx:id="x3" />
+          </GridPane.margin>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+          <children>
+            <Label text="Descrição avaliação:">
+              <VBox.margin>
+                <Insets left="5.0" fx:id="x5" />
+              </VBox.margin>
+            </Label>
+            <TextField fx:id="txtDescAval" prefWidth="200.0" promptText="Assunto da avaliação...">
+              <VBox.margin>
+                <Insets right="10.0" />
+              </VBox.margin>
+            </TextField>
+          </children>
+          <GridPane.margin>
+            <Insets fx:id="x3" />
+          </GridPane.margin>
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+          <children>
+            <Label text="Observações: ">
+              <VBox.margin>
+                <Insets left="5.0" fx:id="x6" />
+              </VBox.margin>
+            </Label>
+            <TextArea fx:id="txtAreaObs" maxWidth="-Infinity" prefHeight="145.0" prefWidth="416.0" promptText="Conteudo da avaliação..." wrapText="true">
+              <VBox.margin>
+                <Insets top="20.0" />
+              </VBox.margin>
+            </TextArea>
+          </children>
+          <padding>
+            <Insets top="15.0" fx:id="x2" />
+          </padding>
+          <GridPane.margin>
+            <Insets left="10.0" fx:id="x6" />
+          </GridPane.margin>
+        </VBox>
+        <VBox fx:id="vBoxCalendarAv" padding="$x2" prefHeight="230.0" prefWidth="341.0" GridPane.columnIndex="3" GridPane.columnSpan="1" GridPane.rowIndex="1">
+          <children>
+            <Label text="Data da Avaliação:">
+              <VBox.margin>
+                <Insets bottom="20.0" left="5.0" />
+              </VBox.margin>
+            </Label>
+          </children>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+          <children>
+            <Label text="Aluno:">
+              <VBox.margin>
+                <Insets left="15.0" fx:id="x1" />
+              </VBox.margin>
+            </Label>
+            <ComboBox fx:id="cmbBoxAlunoNewAval" minWidth="-Infinity" prefWidth="300.0">
+              <VBox.margin>
+                <Insets left="10.0" fx:id="x6" />
+              </VBox.margin>
+            </ComboBox>
+          </children>
+        </VBox>
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+          <children>
+            <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#saveNewAssessment" prefHeight="24.0" prefWidth="100.0" text="Salvar">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button minHeight="-Infinity" mnemonicParsing="false" onAction="#closeNewAssessment" prefHeight="24.0" prefWidth="100.0" text="Fechar" />
+          </children>
+          <padding>
+            <Insets right="10.0" />
+          </padding>
+        </HBox>
+        <VBox fx:id="vBoxNota" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+          <children>
+            <Label text="Nota:">
+              <VBox.margin>
+                <Insets left="5.0" fx:id="x4" />
+              </VBox.margin>
+            </Label>
+          </children>
+          <GridPane.margin>
+            <Insets fx:id="x3" />
+          </GridPane.margin>
+        </VBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="157.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="163.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="0.0" prefWidth="120.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="316.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="230.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</AnchorPane>
