@@ -2,3 +2,7 @@
 /target/
 /.settings/
 /.classpath
+/.idea
+/bd/bdAVFinal.tmp
+/bd/bdAVFinal.log
+/bd/bdAVFinal.properties
