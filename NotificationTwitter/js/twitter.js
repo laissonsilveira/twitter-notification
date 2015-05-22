@@ -2,23 +2,15 @@ var twitter = {};
 var accounts = store.get("accounts") || [];
 twitter.version = 4.1;
 twitter.apiRoot = "https://api.twitter.com/1.1/";
-//twitter.consumerKey = "JPRtaafuUN3zcqFjxXCbJQ";
-//twitter.consumerSecret = "VOT7yrQ5AZ57QzqljTRRjwylf5KPUfWoUujibZMEw";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
 twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
-twitter.growlId = "";
-twitter.timelineScrollCache = {};
 twitter.setup = function () {
-    localStorage.removeItem("timelineCache");
     for (var a in accounts) {
         if (!accounts[a].accessToken) {
             accounts.splice(a, 1);
             updateAccounts();
             document.location.reload()
         } else {
-            if (accounts.length == 1) {
-                accounts[a]["default"] = true
-            }
             twitter.loadAccount(accounts[a])
         }
     }
@@ -716,52 +708,30 @@ twitter.getStatus = function (b) {
 };
 twitter.notify = function (d, b) {
     var e = {};
-    if (store.get("growl")) {
-        var f = jQuery.parseJSON(d.stream.response[b]);
-        if (f.direct_message) {
-            if (f.direct_message.sender.id == d.id) {
-                e.title = "Message to " + f.direct_message.recipient.name
-            } else {
-                e.title = "Message from " + f.direct_message.sender.name
-            }
-            e.text = $("<div/>").html(f.direct_message.text).text();
-            e.url = "http://twitter.com/messages";
-            e.image = f.direct_message.sender.profile_image_url
-        } else {
-            if (f.retweeted_status) {
-                f = f.retweeted_status
-            }
-            e.title = f.user.name;
-            e.text = $("<div/>").html(f.text).text();
-            e.url = "http://twitter.com/" + f.user.screen_name + "/status/" + f.id_str;
-            e.image = f.user.profile_image_url
-        }
-        chrome.extension.sendRequest(twitter.growlId, e, function (g) {
-            webkitNotifications.createHTMLNotification("notification.html?account=" + d.id + "&id=" + b).show()
-        })
-    } else {
-        var f = jQuery.parseJSON(d.stream.response[b]);
-        var a;
-        if (f.direct_message) {
-            if (f.direct_message.sender_id != d.id) {
-                var a = new Notification(f.direct_message.sender.name, {icon: f.direct_message.sender.profile_image_url_https, body: f.direct_message.text});
-                a.onclick = function () {
-                    chrome.tabs.create({url: "http://twitter.com/messages"})
-                };
-            }
-        } else {
-            var a = new Notification(f.user.name, {icon: f.user.profile_image_url_https, body: f.text});
+    var f = jQuery.parseJSON(d.stream.response[b]);
+    var a;
+    if (f.direct_message) {
+        if (f.direct_message.sender_id != d.id) {
+            var a = new Notification(f.direct_message.sender.name, {
+                icon: f.direct_message.sender.profile_image_url_https,
+                body: f.direct_message.text
+            });
             a.onclick = function () {
-                chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
+                chrome.tabs.create({url: "http://twitter.com/messages"})
             };
         }
+    } else {
+        var a = new Notification(f.user.name, {icon: f.user.profile_image_url_https, body: f.text});
+        a.onclick = function () {
+            chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
+        };
+    }
 
-        var c = store.get("timeout");
-        if (c && a) {
-            setTimeout(function () {
-                a.close()
-            }, c * 1000)
-        }
+    var c = store.get("timeout");
+    if (c && a) {
+        setTimeout(function () {
+            a.close()
+        }, c * 1000)
     }
 };
 twitter.decrementID = function (b) {
@@ -771,6 +741,7 @@ twitter.decrementID = function (b) {
     }
     return b.slice(0, a) + (b.substr(a) - 1)
 };
+
 $(document).ready(function () {
     var d = window.location.href.split("?");
     if (d[1]) {
