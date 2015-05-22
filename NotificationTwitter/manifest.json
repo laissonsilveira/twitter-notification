@@ -1,0 +1,23 @@
+{
+   "background": {
+      "page": "background.html"
+   },
+   "browser_action": {
+      "default_icon": "images/128.png",
+      "default_popup": "options/index.html",
+      "default_title": "Enable Twitter"
+   },
+   "content_security_policy": "script-src 'self'; object-src 'self'",
+   "description": "Show notification Twitter",
+   "icons": {
+      "128": "images/128.png",
+      "16": "images/16.png",
+      "48": "images/48.png"
+   },
+   "manifest_version": 2,
+   "name": "Notification Twitter",
+   "options_page": "options/index.html",
+   "permissions": [ "tabs", "notifications", "http://*.twitter.com/", "https://*.twitter.com/" ],
+   "version": "0.1",
+   "web_accessible_resources": [ "background.html" ]
+}
