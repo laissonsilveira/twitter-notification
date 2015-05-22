@@ -1,0 +1,155 @@
+﻿{
+    "enter_password": {
+        "message": "Inserire la password"
+    },
+    "close_browser": {
+        "message": "Il tuo browser verrà chiuso!"
+    },
+    "pass_not_found_close": {
+        "message": "Le password non corrispondono, il browser verrà chiuso!"
+    },
+    "pass_saved": {
+        "message": "Password salvate con successo!"
+    },
+    "pass_different": {
+        "message": "Password non corrisponde!"
+    },
+    "pass_size": {
+        "message": "La password deve essere compresa tra 3 e 16 caratteri."
+    },
+    "pass_invalid": {
+        "message": "Campo Password consentono solo: az 0-9."
+    },
+    "del_pass_confirm": {
+        "message": "Vuoi eliminare la password?"
+    },
+    "del_pass_sucess": {
+        "message": "Password cancellato con successo!"
+    },
+    "pass_not_found": {
+        "message": "Non password trovato!"
+    },
+    "enterPass_again": {
+        "message": "Si prega di inserire la password registrata!"
+    },
+    "password": {
+        "message": "Password:"
+    },
+    "password_confirm": {
+        "message": "Conferma password:"
+    },
+    "legend_newPass": {
+        "message": "Nuova password"
+    },
+    "span_dica": {
+        "message": "Campo obbligatorio"
+    },
+    "btn_save": {
+        "message": "Salva"
+    },
+    "btn_delete": {
+        "message": "Cancella password"
+    },
+    "title": {
+        "message": "Crea nuova password"
+    },
+    "pass_different_save": {
+        "message": "Le password devono essere uguali!"
+    },
+    "leg_passBrow_i18n": {
+        "message": "PassBrow - Protezione per il browser"
+    },
+    "btn_cancel_i18n": {
+        "message": "Annullare"
+    },
+    "btn_block_i18n": {
+        "message": "Bloccare"
+    },
+    "btn_options_i18n": {
+        "message": "Opzioni"
+    },
+    "msg_need_new_pass_i18n": {
+        "message": "Accedere alle opzioni e firmare una nuova password!"
+    },
+    "context_block_i18n": {
+        "message": "Bloccare browser"
+    },
+    "lbl_autoBlock_i18n": {
+        "message": "Auto-bloccare dopo "
+    },
+    "lbl_autoBlock_sec_i18n": {
+        "message": " secondi."
+    },
+    "legend_options_right_i18n": {
+        "message": "Opzioni aggiuntive"
+    },
+    "dica_shortcut_i18n": {
+        "message": "Ctrl+Shift+X per bloccare Browser"
+    },
+    "dica_shortcut_ps_i18n": {
+        "message": "Questa opzione va dal Google Chrome 25"
+    },
+    "lbl_shortcut_i18n": {
+        "message": "Utilizzare i tasti di scelta rapida."
+    },
+    "subTitle_i18n": {
+        "message": "Opzioni"
+    },
+    "btn_exit_i18n": {
+        "message": "Uscire"
+    },
+    "exit_question_i18n": {
+        "message": "La finestra si chiuderà e le opzioni non sono salvate andranno perse.\n\n Sei sicuro di voler uscire?"
+    },
+    "confirm_saveOpAlt_i18n": {
+        "message": "Conferma le modifiche?"
+    },
+    "saveOpAlt_sucess_i18n": {
+        "message": "Impostazioni salvate con successo!"
+    },
+    "msg_allow_incognito_i18n": {
+        "message": "Per il vostro browser non è completamente sicuro, selezionare l'opzione 'Consenti modalità in incognito' per estensione PassBrow nella finestra qui sotto!"
+    },
+    "lbl_authenticator_chk_i18n": {
+        "message": "Utilizzare il generatore di codice PassBrow-Authenticator (PBA) per l'autenticazione del tuo browser web"
+    },
+    "dica_authenticator_i18n": {
+        "message": "Per accedere, registrarsi tuo browser in applicazione PassBrow-Authenticator inserendo questo codice nel PBA"
+    },
+    "lbl_authenticator_download_i18n": {
+        "message": "Per utilizzare PassBrow-Authenticator è necessario scaricare l'applicazione sul sito Google Play. <br> Clicca sull'immagine per avviare l'installazione."
+    },
+    "legend_options_authenticator_i18n": {
+        "message": "PassBrow-Authenticator"
+    },
+    "title_img_download_authenticator_i18n": {
+        "message": "Scarica la PassBrow-Authenticator"
+    },
+    "hint_input_hash_authenticator_i18n": {
+        "message": "Passe o mouse sobre para ver o código..."
+    },
+    "enter_code_authenticator_i18n": {
+        "message": "Inserisci il codice generato dal PassBrow-Authenticator"
+    },
+    "lbl_donative_i18n": {
+        "message": "Fai il tuo contributo!"
+    },
+    "dica_msg_disable_authenticator_i18n": {
+        "message": "Per consentire l'utilizzo della password, deselezionare: <br><i>- 'Utilizzare il generatore di codice PassBrow-Authenticator...'</i>"
+    },
+    "confirm_saveFile_i18n": {
+        "message": "Per motivi di sicurezza, salvare il codice sul vostro computer. Vuoi risparmiare adesso?"
+    },
+    "notification_hash_title_i18n": {
+        "message": "ATTENZIONE - Migliora il codice in PassBrow-Authenticator"
+    },
+    "notification_hash_msg_i18n": {
+        "message": "L'uso di PassBrow-Authenticator (PBA) è stato disattivato, si prega di abilitare di nuovo e immettere il nuovo codice nel PBA"
+    },
+    "notification_hash_button_01_title_i18n": {
+        "message": "Se la modifica è stata apportata o \nnon utilizzare PBA, Clicca Qui!"
+    },
+    "notification_hash_button_02_title_i18n": {
+        "message": "Per aprire le opzioni, Clicca Qui!"
+    }
+}

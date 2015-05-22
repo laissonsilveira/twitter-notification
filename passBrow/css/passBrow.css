@@ -1,0 +1,153 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size:12px;
+}
+
+h2 {
+	color: white;
+	background: gray;
+	padding: 10px 5px 10px 10px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 4px;
+}
+
+hr#hr_op_right {
+	width: 380px;
+}
+
+label {
+	width: 140px;
+	font-weight: bold;
+	color: #555555;
+}
+
+.dica {
+	color: #666666;
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: right;
+}
+
+.dica#dica_msg_disable_authenticator,#dica_shortcut_ps{
+	text-align: left;
+	color: #DA4D39;
+}
+
+input {
+	font-size: 10pt;
+}
+
+input#autoBlockCount {
+	width: 65px; 
+	text-align: right;
+}
+
+.text {
+	width: 200px;
+}
+
+input:disabled {
+	background:rgb(201, 201, 201);
+}
+
+select {
+	border-spacing: 0px;
+	margin: 0px;
+	space: 0px;
+	_padding-right: 1px;
+}
+
+.alert {
+	color: #DA4D39;
+	float: left;
+	display: none;
+	font-size: 10px;
+}
+
+#alertGeral, #alertGeral_right {
+	display: none; 
+	padding:3px 25px 3px 25px;
+	color:#DA4D39;
+	background:white;
+	margin-left:2px;
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+fieldset {
+	border: 0px;
+	background-color: #E8E8E8;
+}
+
+fieldset#field_popup {
+	width: 380px;
+	background-color: #ddd;
+}
+
+fieldset#field_newPass, #field_options_right{
+	width: 395px;
+	height: 190px;
+}
+
+legend {
+	color: white;
+	background: gray;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border-radius: 4px; 
+}
+
+legend#legend_passBrow {
+	padding: 5px;
+}
+
+.assinatura {
+	color: #666666;
+	display: block;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+/* Buttons */
+.button {
+    min-width: 100px;
+	font-size: 12px;
+	height: 25px; 
+	line-height: 25px; 
+    color: white;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    -o-transition: border-color .218s;
+    transition: border-color .218s;
+    background: #3085d6;
+    border: solid 1px #dcdcdc;
+    border-radius: 2px;
+    margin-right: 10px;
+    padding: 0 18px;
+    font-weight: bold;
+}
+.button:hover {
+    color: black;
+    border-color: #999;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.button:active {
+    color: black;
+    border-color: #444;
+}
+
+/* Form Styles */
+form label.inline { display: inline-block; padding-right: 20px; }
+form dt { margin: 0; }
+form ul, form ul li { margin-left: 0; list-style-type: none; }
+form fieldset { border-style: solid; border-width: 0.0625em; padding: 1.0em; border-color: #d8d8d8; margin: 1px 0; }
+form fieldset legend { padding: 5px 10px; }
