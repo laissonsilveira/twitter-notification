@@ -722,7 +722,7 @@ twitter.notify = function (d, b) {
             };
         }
     } else {
-        var a = new Notification(f.user.name, {icon: f.user.profile_image_url_https, body: f.text});
+        var a = new Notification(f.user.name + " - Account: @" + d.screenName, {icon: f.user.profile_image_url_https, body: f.text});
         a.onclick = function () {
             chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
         };

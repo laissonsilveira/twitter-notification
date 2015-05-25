@@ -1,22 +1,15 @@
 .settings-list,
 .settings-list-empty {
     border: 1px solid #d9d9d9;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .settings-list-empty {
-    background-color: #f4f4f4;
+    background-color: #adadad;
     box-sizing: border-box;
     min-height: 125px;
     padding-left: 20px;
     padding-top: 20px;
-}
-body {
-    font-family: Helvetica, sans-serif;
-}
-
-.page {
-    display: none;
 }
 
 .avatar {
@@ -34,7 +27,7 @@ body {
 
 .avatar img {
     -webkit-border-radius: 5px;
-    -webkit-box-shadow: 0px -1px 0px #CCC;
+    -webkit-box-shadow: 3px -3px 3px 3px #CCC;
 }
 
 .account {
@@ -55,4 +48,8 @@ body {
     clear: both;
     padding: 6px 10px 5px 10px;
     border-top: 1px solid #D9D9D9;
+}
+
+.notifyTweet {
+    background-color: red;
 }

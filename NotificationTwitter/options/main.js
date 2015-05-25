@@ -23,7 +23,7 @@ $(document).ready(function () {
             this.checked = store.get(this.id)
         }
     });
-    $("button").live("click", function () {
+    $("button").on("click", function () {
         switch (this.id) {
             case"connect":
                 chrome.extension.getBackgroundPage().twitter.requestToken();
@@ -33,21 +33,20 @@ $(document).ready(function () {
                 var c = this.parentNode.parentNode.parentNode.parentNode;
                 var a = c.id.substr(7);
                 accounts = chrome.extension.getBackgroundPage().accounts;
-                if (this.className == "logout") {
-                    if (confirm("Logout of this account?")) {
-                        try {
-                            accounts[a].disabled = true;
-                            console.log(accounts[a].screenName + " removed");
-                            accounts[a].stream.connection.abort();
-                        } catch (d) {
-                        }
-                        accounts.splice(a, 1);
-                        chrome.extension.getBackgroundPage().updateAccounts();
-                        c.parentNode.removeChild(c);
-                        loadAccounts();
+                if (this.id == "btn-confirm-logout") {
+                    try {
+                        accounts[a].disabled = true;
+                        console.log(accounts[a].screenName + " removed");
+                        accounts[a].stream.connection.abort();
+                    } catch (d) {
+                        console.log(d);
                     }
+                    accounts.splice(a, 1);
+                    chrome.extension.getBackgroundPage().updateAccounts();
+                    c.parentNode.removeChild(c);
+                    loadAccounts();
                 }
-                if (this.className === "disable") {
+                if (this.id === "btn-disable") {
                     if (accounts[a].disabled) {
                         accounts[a].disabled = false;
                         accounts[a].stream.start(accounts[a]);
@@ -66,7 +65,7 @@ $(document).ready(function () {
                 break;
         }
     });
-    $("input").live("change", function () {
+    $("input").on("change", function () {
         if (this.id) {
             store.set(this.id, this.checked)
         } else {
@@ -83,8 +82,8 @@ function loadAccounts() {
         if (accounts[a].image) {
             $("#accountTemplate").clone().appendTo("#accountList").attr("id", "account" + a).show();
             $("#account" + a).find("img").attr("src", accounts[a].image.replace("normal", "reasonably_small"));
-            $("#account" + a).find("h3").text("@" + accounts[a].screenName);
-            $("#account" + a).find("h1").text(accounts[a].name);
+            $("#account" + a).find("h5").text("@" + accounts[a].screenName);
+            $("#account" + a).find("h2").text(accounts[a].name);
             if (accounts[a].disabled) {
                 $("#account" + a).find(".disable").text("Enable");
                 document.getElementById("account" + a).style.opacity = "0.2";
@@ -97,6 +96,6 @@ function loadAccounts() {
         }
     }
     if (accounts.length == 0) {
-        $("#accountList").html('<div class="account"><span>No accounts connected</span></div>');
+        $("#accountList").html('<div class="container jumbotron account"><span>No accounts connected</span></div>');
     }
 }
