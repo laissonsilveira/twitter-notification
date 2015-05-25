@@ -213,12 +213,12 @@ function updateAccounts() {
     var a = [];
     for (var b in accounts) {
         a[b] = jQuery.extend({}, accounts[b]);
-        delete a[b].stream
+        delete a[b].stream;
     }
     if (!a.length) {
-        store.set("accounts", "")
+        store.set("accounts", "");
     } else {
-        store.set("accounts", a)
+        store.set("accounts", a);
     }
 }
 twitter.stream = function (a) {
@@ -313,6 +313,11 @@ function connectionError() {
         document.location.reload()
     }, 60000)
 }
+twitter.abortStream = function(account) {
+    console.log("Abort Stream")
+    account.stream.connection.abort();
+}
+
 twitter.requestToken = function () {
     var a = Date.now();
     twitter.oauthRequest({
@@ -412,6 +417,9 @@ twitter.loadAccount = function (a) {
                 a.screenName = c.screen_name;
                 a.image = c.profile_image_url;
                 a.stream = new twitter.stream();
+                if (a.disabled === undefined) {
+                    a.disabled = false;
+                }
                 console.log("Updating accounts store");
                 updateAccounts();
                 if (!a.disabled) {
@@ -722,7 +730,7 @@ twitter.notify = function (d, b) {
             };
         }
     } else {
-        var a = new Notification(f.user.name + " - Account: @" + d.screenName, {icon: f.user.profile_image_url_https, body: f.text});
+        var a = new Notification(f.user.name + " : @" + d.screenName, {icon: f.user.profile_image_url_https, body: f.text});
         a.onclick = function () {
             chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
         };

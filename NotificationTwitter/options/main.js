@@ -25,19 +25,18 @@ $(document).ready(function () {
     });
     $("button").on("click", function () {
         switch (this.id) {
-            case"connect":
+            case "connect":
                 chrome.extension.getBackgroundPage().twitter.requestToken();
                 break;
-
             default:
                 var c = this.parentNode.parentNode.parentNode.parentNode;
                 var a = c.id.substr(7);
                 accounts = chrome.extension.getBackgroundPage().accounts;
-                if (this.id == "btn-confirm-logout") {
+                if (this.class === "btn-confirm-logout") {
                     try {
                         accounts[a].disabled = true;
                         console.log(accounts[a].screenName + " removed");
-                        accounts[a].stream.connection.abort();
+                        chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
                     } catch (d) {
                         console.log(d);
                     }
@@ -46,7 +45,7 @@ $(document).ready(function () {
                     c.parentNode.removeChild(c);
                     loadAccounts();
                 }
-                if (this.id === "btn-disable") {
+                if (this.class === "btn-disable") {
                     if (accounts[a].disabled) {
                         accounts[a].disabled = false;
                         accounts[a].stream.start(accounts[a]);
@@ -55,7 +54,7 @@ $(document).ready(function () {
                         console.log(accounts[a].screenName + " enabled");
                     } else {
                         accounts[a].disabled = true;
-                        accounts[a].stream.connection.abort();
+                        chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
                         this.innerText = "Enable";
                         c.style.opacity = "0.2";
                         console.log(accounts[a].screenName + " disabled");

@@ -57,11 +57,14 @@
     <div>
         <div class="avatar">
             <img width="128" height="128"/>
-
             <h5 style="text-align: center"></h5>
         </div>
+        <div class="actions">
+            <button class="btn btn-sm btn-warning btn-disable">Disable</button>
+            <button class="btn btn-sm btn-danger btn-logout" data-toggle="modal" data-target="#modalConfirmLogout">Logout</button>
+        </div>
         <div><h2></h2></div>
-        <div>
+        <div style="padding-top:10px">
             <b>Notify for:</b>
 
             <div class="checkbox">
@@ -77,10 +80,6 @@
                     <input class="notifyDm" type="checkbox">
                     Messages
                 </label>
-            </div>
-            <div class="actions">
-                <button id="btn-disable" class="btn btn-sm btn-warning">Disable</button>
-                <button id="btn-logout" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalConfirmLogout">Logout</button>
             </div>
         </div>
     </div>

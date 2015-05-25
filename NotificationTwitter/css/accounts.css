@@ -44,12 +44,11 @@
 }
 
 .actions {
-    text-align: center;
-    clear: both;
-    padding: 6px 10px 5px 10px;
-    border-top: 1px solid #D9D9D9;
-}
-
-.notifyTweet {
-    background-color: red;
+    /*text-align: center;*/
+    /*clear: both;*/
+    /*padding: 6px 10px 5px 10px;*/
+    /*border-top: 1px solid #D9D9D9;*/
+    float: right;
+    margin-top: -33px;
+    margin-right: 10px;
 }
