@@ -98,6 +98,7 @@ twitter.oauthRequest = function (d) {
     }
 };
 function processResponse(f) {
+    console.log(f.stream.connection);
     f.stream.response = f.stream.connection.responseText.split("\r");
     while (f.stream.response[f.stream.index + 1]) {
         if (f.stream.response[f.stream.index].length > 1) {
@@ -347,6 +348,7 @@ twitter.requestToken = function () {
     })
 };
 twitter.accessToken = function (a, e) {
+    console.log(" - DEBUG: accessToken()")
     accounts = chrome.extension.getBackgroundPage().accounts;
     for (var b in accounts) {
         if (accounts[b].timestamp == e) {
@@ -385,14 +387,14 @@ twitter.accessToken = function (a, e) {
                 d.notifyMention = true;
                 chrome.extension.getBackgroundPage().twitter.loadNewAccount(d);
                 new Notification("Authorised!", {
-                    body: "Twitter Notifier is now authorised and running.",
-                    icon: "images/48.png"
-                })
+                    icon: "images/48.png",
+                    body: "Twitter Notifier is now authorised and running."
+                });
             } else {
                 new Notification("Not Authorised", {
-                    body: "That account has already been connected to Twitter Notifier.",
-                    icon: "images/48.png"
-                })
+                    icon: "images/48.png",
+                    body: "That account has already been connected to Twitter Notifier."
+                });
             }
             updateAccounts();
             chrome.tabs.getCurrent(function (i) {
@@ -402,7 +404,6 @@ twitter.accessToken = function (a, e) {
     })
 };
 twitter.loadAccount = function (a) {
-    console.log("Loading account " + a.screenName);
     twitter.oauthRequest({
         url: twitter.apiRoot + "account/verify_credentials.json", account: a, success: function (c) {
             try {
@@ -423,7 +424,7 @@ twitter.loadAccount = function (a) {
             new Notification("Could not authenticate user @" + a.screenName, {
                 icon: "images/48.png",
                 body: "Twitter Notifier failed to authorise this account with Twitter. Try logging out and logging in of this account on the accounts page."
-            })
+            });
         }
     })
 };
@@ -760,11 +761,13 @@ $(document).ready(function () {
         twitter.accessToken(a, c)
     } else {
         if (!localStorage.getItem("firstRun")) {
+            console.log(" - DEBUG: FirstRun")
             if (!localStorage.getItem("version")) {
                 chrome.tabs.create({url: "options/index.html"});
                 localStorage.setItem("timeout", 10);
                 localStorage.setItem("fontSize", 13);
-                localStorage.setItem("version", twitter.version)
+                localStorage.setItem("version", twitter.version);
+                localStorage.setItem("connectionError", true);
             } else {
                 accounts = [{
                     accessToken: localStorage.getItem("accessToken"),
@@ -798,13 +801,13 @@ $(document).ready(function () {
             }
             localStorage.setItem("firstRun", true)
         }
-        if (localStorage.getItem("version") < twitter.version) {
-            localStorage.setItem("version", twitter.version);
-            new Notification("Twitter Notifier Updated!", {
-                icon: "images/48.png",
-                body: "Twitter Notifier has been updated to the latest and greatest version!"
-            })
-        }
+        //if (localStorage.getItem("version") < twitter.version) {
+        //    localStorage.setItem("version", twitter.version);
+        //    new Notification("Twitter Notifier Updated!", {
+        //        icon: "images/48.png",
+        //        body: "Twitter Notifier has been updated to the latest and greatest version!"
+        //    })
+        //}
         twitter.setup()
     }
 });

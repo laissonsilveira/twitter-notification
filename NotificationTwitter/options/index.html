@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="../css/options.css" />
     <title>Twitter Notification - Options</title>
     <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../js/store+json2.min.js"></script>
@@ -10,8 +11,57 @@
 <h1>Twitter Notification</h1>
 
 <div>
+    <section>
+        <h3 style="vertical-align:top">Active Accounts</h3>
+        <div id="accountList"></div>
+    </section>
     <button id="connect">Connect to Twitter</button>
-    <button id="logout">Disconnect to Twitter</button>
+    <section>
+        <h3>Errors</h3>
+        <div>
+            <div class="checkbox">
+                <label>
+                    <input id="connectionError" type="checkbox">
+                    <span>Show notifications for connection errors</span>
+                </label>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="settings-list account" id="accountTemplate" style="display:none">
+    <div>
+        <div class="avatar">
+            <img width="128" height="128" />
+            <h3></h3>
+        </div>
+        <div class="spacer" style="height: 0px;"></div>
+        <div><h1></h1></div>
+        <div style="padding-top:10px">
+            <b>Notify for:</b>
+            <div class="checkbox">
+                <label>
+                    <input class="notifyTweet" type="checkbox">
+                    <span>Tweets</span>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input class="notifyMention" type="checkbox">
+                    <span>Mentions</span>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input class="notifyDm" type="checkbox">
+                    <span>Messages</span>
+                </label>
+            </div>
+            <div class="actions">
+                <button class="disable">Disable</button>
+                <button class="logout">Logout</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

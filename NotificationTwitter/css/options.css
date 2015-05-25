@@ -1,0 +1,58 @@
+.settings-list,
+.settings-list-empty {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+}
+
+.settings-list-empty {
+    background-color: #f4f4f4;
+    box-sizing: border-box;
+    min-height: 125px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+body {
+    font-family: Helvetica, sans-serif;
+}
+
+.page {
+    display: none;
+}
+
+.avatar {
+    float: left;
+    margin: 10px;
+}
+
+.avatar h3 {
+    text-align: center;
+    margin: 5px 0 0 0;
+    width: 128px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.avatar img {
+    -webkit-border-radius: 5px;
+    -webkit-box-shadow: 0px -1px 0px #CCC;
+}
+
+.account {
+    margin-top: 15px !important;
+}
+
+.account h1 {
+    overflow: auto;
+    padding-top: 6px !important;
+}
+
+.account input {
+    margin-left: 10px !important;
+}
+
+.actions {
+    text-align: center;
+    clear: both;
+    padding: 6px 10px 5px 10px;
+    border-top: 1px solid #D9D9D9;
+}
