@@ -17,7 +17,7 @@
     margin: 10px;
 }
 
-.avatar h3 {
+.avatar h5 {
     text-align: center;
     margin: 5px 0 0 0;
     width: 128px;
@@ -44,11 +44,30 @@
 }
 
 .actions {
-    /*text-align: center;*/
-    /*clear: both;*/
-    /*padding: 6px 10px 5px 10px;*/
-    /*border-top: 1px solid #D9D9D9;*/
     float: right;
-    margin-top: -33px;
+    margin-top: 10px;
     margin-right: 10px;
+}
+
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td {
+    vertical-align: top;
+}
+
+tr td:first-child {
+    width:1%;
+    white-space:nowrap;
+}
+
+.notify {
+    padding: 10px;
+}
+
+.notify label {
+    font-weight: 400;
 }

@@ -23,47 +23,6 @@ $(document).ready(function () {
             this.checked = store.get(this.id)
         }
     });
-    $("button").on("click", function () {
-        switch (this.id) {
-            case "connect":
-                chrome.extension.getBackgroundPage().twitter.requestToken();
-                break;
-            default:
-                var c = this.parentNode.parentNode.parentNode.parentNode;
-                var a = c.id.substr(7);
-                accounts = chrome.extension.getBackgroundPage().accounts;
-                if (this.class === "btn-confirm-logout") {
-                    try {
-                        accounts[a].disabled = true;
-                        console.log(accounts[a].screenName + " removed");
-                        chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
-                    } catch (d) {
-                        console.log(d);
-                    }
-                    accounts.splice(a, 1);
-                    chrome.extension.getBackgroundPage().updateAccounts();
-                    c.parentNode.removeChild(c);
-                    loadAccounts();
-                }
-                if (this.class === "btn-disable") {
-                    if (accounts[a].disabled) {
-                        accounts[a].disabled = false;
-                        accounts[a].stream.start(accounts[a]);
-                        this.innerText = "Disable";
-                        c.style.opacity = "1";
-                        console.log(accounts[a].screenName + " enabled");
-                    } else {
-                        accounts[a].disabled = true;
-                        chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
-                        this.innerText = "Enable";
-                        c.style.opacity = "0.2";
-                        console.log(accounts[a].screenName + " disabled");
-                    }
-                    chrome.extension.getBackgroundPage().updateAccounts();
-                }
-                break;
-        }
-    });
     $("input").on("change", function () {
         if (this.id) {
             store.set(this.id, this.checked)
@@ -74,7 +33,11 @@ $(document).ready(function () {
             chrome.extension.getBackgroundPage().updateAccounts()
         }
     });
+    $("button#connect").on("click", function () {
+        chrome.extension.getBackgroundPage().twitter.requestToken();
+    });
 });
+
 function loadAccounts() {
     $("#accountList").html("");
     for (var a in accounts) {
@@ -96,5 +59,53 @@ function loadAccounts() {
     }
     if (accounts.length == 0) {
         $("#accountList").html('<div class="container jumbotron account"><span>No accounts connected</span></div>');
+    } else {
+        $("button.btn-confirm-logout").on("click", function () {
+            var c = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+            var a = c.id.substr(7);
+            accounts = chrome.extension.getBackgroundPage().accounts;
+            try {
+                accounts[a].disabled = true;
+                console.log(accounts[a].screenName + " removed");
+                chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
+            } catch (d) {
+                console.log(d);
+            }
+            accounts.splice(a, 1);
+            chrome.extension.getBackgroundPage().updateAccounts();
+            c.parentNode.removeChild(c);
+            loadAccounts();
+        });
+        $("button.btn-disable").on("click", function () {
+            var c = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+            var a = c.id.substr(7);
+            accounts = chrome.extension.getBackgroundPage().accounts;
+            if (accounts[a].disabled) {
+                enableAccount(this,c,a);
+            } else {
+                disableAccount(this,c,a);
+            }
+            chrome.extension.getBackgroundPage().updateAccounts();
+        });
     }
+}
+
+function disableAccount(button, component, index) {
+    accounts[index].disabled = true;
+    chrome.extension.getBackgroundPage().twitter.abortStream(accounts[index]);
+    component.style.opacity = 0.2;
+    button.innerText = "Enable";
+    button.classList.remove("btn-warning");
+    button.classList.add("btn-success");
+    console.log(accounts[index].screenName + " disabled");
+}
+
+function enableAccount(button, component, index) {
+    accounts[index].disabled = false;
+    accounts[index].stream.start(accounts[index]);
+    button.innerText = "Disable";
+    button.classList.remove("btn-success");
+    button.classList.add("btn-warning");
+    component.style.opacity = 1;
+    console.log(accounts[index].screenName + " enabled");
 }
