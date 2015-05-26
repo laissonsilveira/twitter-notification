@@ -66,10 +66,10 @@ function loadAccounts() {
             accounts = chrome.extension.getBackgroundPage().accounts;
             try {
                 accounts[a].disabled = true;
-                console.log(accounts[a].screenName + " removed");
+                chrome.extension.getBackgroundPage().logInConsole(accounts[a].screenName + " removed", true);
                 chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
             } catch (d) {
-                console.log(d);
+                chrome.extension.getBackgroundPage().logInConsole(d, false);
             }
             accounts.splice(a, 1);
             chrome.extension.getBackgroundPage().updateAccounts();
@@ -97,7 +97,7 @@ function disableAccount(button, component, index) {
     button.innerText = "Enable";
     button.classList.remove("btn-warning");
     button.classList.add("btn-success");
-    console.log(accounts[index].screenName + " disabled");
+    chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " disabled", true);
 }
 
 function enableAccount(button, component, index) {
@@ -107,5 +107,5 @@ function enableAccount(button, component, index) {
     button.classList.remove("btn-success");
     button.classList.add("btn-warning");
     component.style.opacity = 1;
-    console.log(accounts[index].screenName + " enabled");
+    chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " enabled", true);
 }

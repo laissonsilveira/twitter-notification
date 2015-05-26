@@ -39,7 +39,7 @@ twitter.oauthRequest = function (d) {
     OAuth.setTimestampAndNonce(message);
     OAuth.SignatureMethod.sign(message, accessor);
     if (d.stream) {
-        console.log("Opening user stream for user " + d.account.screenName);
+        logInConsole("Opening user stream for user " + d.account.screenName, true);
         $.ajax({
             url: message.action,
             type: message.method,
@@ -89,7 +89,7 @@ twitter.oauthRequest = function (d) {
                 }
             },
             error: function (g, f, h) {
-                console.log(g.responseText);
+                logInConsole(g.responseText, false);
                 if (d.error) {
                     d.error(g.responseText, d.parameters, g)
                 }
@@ -98,7 +98,7 @@ twitter.oauthRequest = function (d) {
     }
 };
 function processResponse(f) {
-    console.log(f.stream.connection);
+    logInConsole(f.stream.connection, true);
     f.stream.response = f.stream.connection.responseText.split("\r");
     while (f.stream.response[f.stream.index + 1]) {
         if (f.stream.response[f.stream.index].length > 1) {
@@ -201,7 +201,7 @@ function processResponse(f) {
     }
 }
 function checkStream(a) {
-    console.log("Checking stream activity...");
+    logInConsole("Checking stream activity...", true);
     if (a.stream.connection) {
         if (a.stream.connection.responseText.length > 5000000 || a.stream.lastIndex == a.stream.index) {
             a.stream.connection.abort()
@@ -231,36 +231,36 @@ twitter.stream = function (a) {
     this.lastIndex = 0;
     this.wait = a || 0;
     this.start = function (b) {
-        console.log("Fetching timelines...");
+        logInConsole("Fetching timelines...", true);
         twitter.getTimeline({
             accountId: b.id, type: "home", success: function (c) {
                 b.stream.timeline = c;
-                console.log("Fetched home")
+                logInConsole("Fetched home", true);
             }
         });
         twitter.getUserTimeline({
             accountId: b.id, success: function (c) {
                 b.stream.userTimeline = c;
-                console.log("Fetched user")
+                logInConsole("Fetched user", true);
             }
         });
         twitter.getMentions({
             accountId: b.id, success: function (c) {
                 b.stream.mentions = c;
-                console.log("Fetched mentions")
+                logInConsole("Fetched mentions", true);
             }
         });
         twitter.getMessages({
             accountId: b.id, success: function (c) {
                 b.stream.messages = c;
-                console.log("Fetched messages")
+                logInConsole("Fetched messages", true);
             }
         });
         twitter.oauthRequest({url: "https://userstream.twitter.com/1.1/user.json", stream: true, account: b})
     }
 };
 function streamComplete(a, b) {
-    console.log(b.screenName + " stream complete");
+    logInConsole(b.screenName + " stream complete", true);
     delete b.stream.connection;
     if (!b.disabled) {
         if (a > 200) {
@@ -314,7 +314,7 @@ function connectionError() {
     }, 60000)
 }
 twitter.abortStream = function(account) {
-    console.log("Abort Stream")
+    logInConsole("Abort Stream", true)
     account.stream.connection.abort();
 }
 
@@ -353,7 +353,7 @@ twitter.requestToken = function () {
     })
 };
 twitter.accessToken = function (a, e) {
-    console.log(" - DEBUG: accessToken()")
+    logInConsole("accessToken", true)
     accounts = chrome.extension.getBackgroundPage().accounts;
     for (var b in accounts) {
         if (accounts[b].timestamp == e) {
@@ -420,7 +420,8 @@ twitter.loadAccount = function (a) {
                 if (a.disabled === undefined) {
                     a.disabled = false;
                 }
-                console.log("Updating accounts store");
+                logInConsole("Updating accounts store", true);
+                logInConsole("Account @" + c.screen_name + " load", true);
                 updateAccounts();
                 if (!a.disabled) {
                     a.stream.start(a)
@@ -526,7 +527,7 @@ twitter.update = function (f, c, e, d) {
         },
         error: function (g, j) {
             g = jQuery.parseJSON(g);
-            console.log(g);
+            logInConsole(g, false);
             new Notification("Status could not be sent", {
                 icon: "images/error.png",
                 body: "Error: " + g.errors.message
@@ -561,7 +562,7 @@ twitter.updateWithMedia = function (h, e, d, g, f, a) {
         },
         error: function (j, l) {
             j = jQuery.parseJSON(j);
-            console.log(j);
+            logInConsole(j, false);
             new Notification("Status could not be sent", {
                 icon: "images/error.png",
                 body: "Error: " + j.errors.message
@@ -665,7 +666,7 @@ twitter.getMessages = function (d) {
                     e.sort(function (h, g) {
                         return new Date(g.created_at) - new Date(h.created_at)
                     });
-                    console.log(e);
+                    logInConsole(e, true);
                     d.success(e)
                 },
                 error: d.error || function () {
@@ -769,13 +770,14 @@ $(document).ready(function () {
         twitter.accessToken(a, c)
     } else {
         if (!localStorage.getItem("firstRun")) {
-            console.log(" - DEBUG: FirstRun")
+            logInConsole("FirstRun", true);
             if (!localStorage.getItem("version")) {
                 chrome.tabs.create({url: "options/index.html"});
                 localStorage.setItem("timeout", 10);
                 localStorage.setItem("fontSize", 13);
                 localStorage.setItem("version", twitter.version);
                 localStorage.setItem("connectionError", true);
+                localStorage.setItem("debug", true);
             } else {
                 accounts = [{
                     accessToken: localStorage.getItem("accessToken"),
@@ -819,3 +821,15 @@ $(document).ready(function () {
         twitter.setup()
     }
 });
+
+logInConsole = function(message, isDebug) {
+    if (message != null) {
+        if (isDebug) {
+            if (localStorage.debug == "true") {
+                console.log(message);
+            }
+        } else {
+            console.log(message);
+        }
+    }
+}
