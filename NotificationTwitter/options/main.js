@@ -61,31 +61,41 @@ function loadAccounts() {
         $("#accountList").html('<div class="container jumbotron account"><span>No accounts connected</span></div>');
     } else {
         $("button.btn-confirm-logout").on("click", function () {
-            var c = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-            var a = c.id.substr(7);
+            chrome.extension.getBackgroundPage().logInConsole("button.btn-confirm-logout", true);
+            if (typeof componentToLogout == "undefined") {
+                chrome.extension.getBackgroundPage().logInConsole("Account not found!", false);
+                return;
+            }
             accounts = chrome.extension.getBackgroundPage().accounts;
             try {
-                accounts[a].disabled = true;
-                chrome.extension.getBackgroundPage().logInConsole(accounts[a].screenName + " removed", true);
-                chrome.extension.getBackgroundPage().twitter.abortStream(accounts[a]);
+                var indexToLogout = componentToLogout.id.substr(7);
+                accounts[indexToLogout].disabled = true;
+                chrome.extension.getBackgroundPage().logInConsole(accounts[indexToLogout].screenName + " removed", true);
+                chrome.extension.getBackgroundPage().twitter.abortStream(accounts[indexToLogout]);
             } catch (d) {
                 chrome.extension.getBackgroundPage().logInConsole(d, false);
             }
-            accounts.splice(a, 1);
+            accounts.splice(indexToLogout, 1);
             chrome.extension.getBackgroundPage().updateAccounts();
-            c.parentNode.removeChild(c);
+            componentToLogout.parentNode.removeChild(componentToLogout);
+            componentToLogout == undefined;
             loadAccounts();
         });
         $("button.btn-disable").on("click", function () {
-            var c = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-            var a = c.id.substr(7);
+            chrome.extension.getBackgroundPage().logInConsole("button.btn-disable", true);
+            var component = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+            var index = component.id.substr(7);
             accounts = chrome.extension.getBackgroundPage().accounts;
-            if (accounts[a].disabled) {
-                enableAccount(this,c,a);
+            if (accounts[index].disabled) {
+                enableAccount(this,component,index);
             } else {
-                disableAccount(this,c,a);
+                disableAccount(this,component,index);
             }
             chrome.extension.getBackgroundPage().updateAccounts();
+        });
+        $("button.btn-logout").on("click", function () {
+            chrome.extension.getBackgroundPage().logInConsole("button.btn-logout", true);
+            componentToLogout = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
         });
     }
 }

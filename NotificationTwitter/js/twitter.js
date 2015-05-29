@@ -48,12 +48,12 @@ twitter.oauthRequest = function (d) {
             xhr: function () {
                 d.account.stream.connection = new XMLHttpRequest();
                 d.account.stream.connection.addEventListener("progress", function () {
-                    processResponse(d.account)
+                    processResponse(d.account);
                 }, false);
-                return d.account.stream.connection
+                return d.account.stream.connection;
             },
             complete: function (f, g) {
-                streamComplete(f.status, d.account)
+                streamComplete(f.status, d.account);
             }
         });
         setInterval(function () {
@@ -85,20 +85,21 @@ twitter.oauthRequest = function (d) {
             xhr: d.xhr,
             success: function (g, f, h) {
                 if (d.success) {
-                    d.success(g)
+                    d.success(g);
+                    logInConsole(g.responseText, false);
                 }
             },
             error: function (g, f, h) {
                 logInConsole(g.responseText, false);
                 if (d.error) {
-                    d.error(g.responseText, d.parameters, g)
+                    d.error(g.responseText, d.parameters, g);
                 }
             }
         })
     }
 };
 function processResponse(f) {
-    logInConsole(f.stream.connection, true);
+    logInConsole(f, true);
     f.stream.response = f.stream.connection.responseText.split("\r");
     while (f.stream.response[f.stream.index + 1]) {
         if (f.stream.response[f.stream.index].length > 1) {
@@ -194,7 +195,8 @@ function processResponse(f) {
                     }
                 }
             } else {
-                f.stream.connection.abort()
+                f.stream.connection.abort();
+                logInConsole("Abort Stream by: " + e, true);
             }
         }
         f.stream.index++
@@ -204,15 +206,19 @@ function checkStream(a) {
     logInConsole("Checking stream activity...", true);
     if (a.stream.connection) {
         if (a.stream.connection.responseText.length > 5000000 || a.stream.lastIndex == a.stream.index) {
-            a.stream.connection.abort()
+            a.stream.connection.abort();
+            logInConsole("Abort Stream by checkStream(){ responseText: " + a.stream.connection.responseText.length
+                + ", lastIndex: " + ", index: " + a.stream.index, true);
         }
         a.stream.lastIndex = a.stream.index
     }
 }
 function updateAccounts() {
+    logInConsole("updateAccounts", true);
     var a = [];
     for (var b in accounts) {
         a[b] = jQuery.extend({}, accounts[b]);
+        logInConsole("Delete: " + a[b].stream, true);
         delete a[b].stream;
     }
     if (!a.length) {
@@ -722,6 +728,7 @@ twitter.notify = function (d, b) {
     var a;
     if (f.direct_message) {
         if (f.direct_message.sender_id != d.id) {
+            logInConsole("Twitter: @" + f.direct_message.sender.screen_name + ", message: " + f.direct_message.text);
             var a = new Notification(f.direct_message.sender.name, {
                 icon: f.direct_message.sender.profile_image_url_https,
                 body: f.direct_message.text
@@ -731,6 +738,7 @@ twitter.notify = function (d, b) {
             };
         }
     } else {
+        logInConsole("ACCOUNT: @" + d.screenName + " - Twitter: @" + f.user.screen_name + ", message: " + f.text);
         var a = new Notification(f.user.name + " : @" + d.screenName, {icon: f.user.profile_image_url_https, body: f.text});
         a.onclick = function () {
             chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
