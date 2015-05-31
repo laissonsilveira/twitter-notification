@@ -4474,6 +4474,13 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
     }
 }
 
+.navbar-text-pull-center {
+    color: #9d9d9d;
+    float: none;
+    margin: 15px;
+    text-align: center
+}
+
 .navbar-fixed-top {
     top: 0;
     border-width: 0 0 1px

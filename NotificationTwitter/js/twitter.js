@@ -1,6 +1,6 @@
 var twitter = {};
 var accounts = store.get("accounts") || [];
-twitter.version = 4.1;
+twitter.version = "1.0";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
 twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
@@ -8,7 +8,7 @@ twitter.setup = function () {
     for (var a in accounts) {
         if (!accounts[a].accessToken) {
             accounts.splice(a, 1);
-            updateAccounts();
+            updateAccountsToStore();
             document.location.reload()
         } else {
             twitter.loadAccount(accounts[a])
@@ -56,9 +56,7 @@ twitter.oauthRequest = function (d) {
                 streamComplete(f.status, d.account);
             }
         });
-        setInterval(function () {
-            checkStream(d.account)
-        }, 45000)
+        intervalTrigger(d);
     } else {
         var e = true;
         if (d.media) {
@@ -86,11 +84,9 @@ twitter.oauthRequest = function (d) {
             success: function (g, f, h) {
                 if (d.success) {
                     d.success(g);
-                    logInConsole(g.responseText, false);
                 }
             },
             error: function (g, f, h) {
-                logInConsole(g.responseText, false);
                 if (d.error) {
                     d.error(g.responseText, d.parameters, g);
                 }
@@ -99,7 +95,7 @@ twitter.oauthRequest = function (d) {
     }
 };
 function processResponse(f) {
-    logInConsole(f, true);
+    //logInConsole(f, true);
     f.stream.response = f.stream.connection.responseText.split("\r");
     while (f.stream.response[f.stream.index + 1]) {
         if (f.stream.response[f.stream.index].length > 1) {
@@ -208,23 +204,34 @@ function checkStream(a) {
         if (a.stream.connection.responseText.length > 5000000 || a.stream.lastIndex == a.stream.index) {
             a.stream.connection.abort();
             logInConsole("Abort Stream by checkStream(){ responseText: " + a.stream.connection.responseText.length
-                + ", lastIndex: " + ", index: " + a.stream.index, true);
+                + ", lastIndex: " + ", index: " + a.stream.index + " }", true);
         }
-        a.stream.lastIndex = a.stream.index
+        a.stream.lastIndex = a.stream.index;
     }
 }
-function updateAccounts() {
-    logInConsole("updateAccounts", true);
+function intervalTrigger(d) {
+    idTriggerCheckInterval = setInterval(function () {
+        checkStream(d.account);
+    }, 45000);
+    logInConsole("Create trigger check stream: id = " + idTriggerCheckInterval);
+}
+function updateAccountsToStore() {
+    logInConsole("updateAccountsToStore", true);
     var a = [];
     for (var b in accounts) {
         a[b] = jQuery.extend({}, accounts[b]);
-        logInConsole("Delete: " + a[b].stream, true);
         delete a[b].stream;
     }
     if (!a.length) {
         store.set("accounts", "");
     } else {
         store.set("accounts", a);
+    }
+}
+function clearTriggerCheckStream() {
+    if (idTriggerCheckInterval) {
+        logInConsole("Clear trigger check stream: id = " + idTriggerCheckInterval);
+        clearInterval(idTriggerCheckInterval);
     }
 }
 twitter.stream = function (a) {
@@ -266,7 +273,7 @@ twitter.stream = function (a) {
     }
 };
 function streamComplete(a, b) {
-    logInConsole(b.screenName + " stream complete", true);
+    //logInConsole(b.screenName + " stream complete", true);
     delete b.stream.connection;
     if (!b.disabled) {
         if (a > 200) {
@@ -281,8 +288,8 @@ function streamComplete(a, b) {
                 b.stream.wait *= 2
             } else {
                 notif = new Notification("Twitter Error", {
-                    icon: "images/48.png",
-                    body: "Twitter Notifier couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
+                    icon: "images/error",
+                    body: "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
                 });
                 setTimeout(function () {
                     b.stream = new twitter.stream(b.stream.wait);
@@ -306,22 +313,21 @@ function streamComplete(a, b) {
     }
 }
 function connectionError() {
-    if (store.get("connectionErrors")) {
-        var a = new Notification("Connection Error", {
-            icon: "images/48.png",
-            body: "Twitter Notifier couldn't connect to Twitter - are you sure you're connected to the internet? Connection will be tried again in 1 minute."
-        })
-    }
+    var a = new Notification("Connection Error", {
+        icon: "images/error",
+        body: "Twitter Notification couldn't connect to Twitter - are you sure you're connected to the internet? Connection will be tried again in 1 minute."
+    });
     setTimeout(function () {
         if (a) {
-            a.close()
+            a.close();
         }
-        document.location.reload()
+        document.location.reload();
     }, 60000)
 }
 twitter.abortStream = function(account) {
     logInConsole("Abort Stream", true)
     account.stream.connection.abort();
+    clearTriggerCheckStream();
 }
 
 twitter.requestToken = function () {
@@ -341,7 +347,7 @@ twitter.requestToken = function () {
                 b[e[0]] = e[1]
             }
             accounts.push({requestToken: b.oauth_token, requestTokenSecret: b.oauth_token_secret, timestamp: a});
-            updateAccounts();
+            updateAccountsToStore();
             if (b.oauth_token) {
                 chrome.tabs.create({url: "https://api.twitter.com/oauth/authorize?oauth_token=" + b.oauth_token})
             } else {
@@ -398,16 +404,16 @@ twitter.accessToken = function (a, e) {
                 d.notifyMention = true;
                 chrome.extension.getBackgroundPage().twitter.loadNewAccount(d);
                 new Notification("Authorised!", {
-                    icon: "images/48.png",
-                    body: "Twitter Notifier is now authorised and running."
+                    icon: "images/128.png",
+                    body: "Twitter Notification is now authorised and running."
                 });
             } else {
                 new Notification("Not Authorised", {
-                    icon: "images/48.png",
-                    body: "That account has already been connected to Twitter Notifier."
+                    icon: "images/error.png",
+                    body: "That account has already been connected to Twitter Notification."
                 });
             }
-            updateAccounts();
+            updateAccountsToStore();
             chrome.tabs.getCurrent(function (i) {
                 chrome.tabs.remove(i.id)
             })
@@ -428,7 +434,7 @@ twitter.loadAccount = function (a) {
                 }
                 logInConsole("Updating accounts store", true);
                 logInConsole("Account @" + c.screen_name + " load", true);
-                updateAccounts();
+                updateAccountsToStore();
                 if (!a.disabled) {
                     a.stream.start(a)
                 }
@@ -437,8 +443,8 @@ twitter.loadAccount = function (a) {
             }
         }, error: function (c, b) {
             new Notification("Could not authenticate user @" + a.screenName, {
-                icon: "images/48.png",
-                body: "Twitter Notifier failed to authorise this account with Twitter. Try logging out and logging in of this account on the accounts page."
+                icon: "images/error.png",
+                body: "Twitter Notification failed to authorise this account with Twitter. Try logging out and logging in of this account on the accounts page."
             });
         }
     })
@@ -780,9 +786,9 @@ $(document).ready(function () {
         if (!localStorage.getItem("firstRun")) {
             logInConsole("FirstRun", true);
             if (!localStorage.getItem("version")) {
-                chrome.tabs.create({url: "options/index.html"});
+                chrome.tabs.create({url: "options/options.html"});
                 localStorage.setItem("timeout", 10);
-                localStorage.setItem("fontSize", 13);
+                //localStorage.setItem("fontSize", 13);
                 localStorage.setItem("version", twitter.version);
                 localStorage.setItem("connectionError", true);
                 localStorage.setItem("debug", true);
@@ -815,15 +821,15 @@ $(document).ready(function () {
                 localStorage.removeItem("notifyDm");
                 localStorage.removeItem("notifyTweet");
                 localStorage.removeItem("notifyMention");
-                updateAccounts()
+                updateAccountsToStore()
             }
             localStorage.setItem("firstRun", true)
         }
         //if (localStorage.getItem("version") < twitter.version) {
         //    localStorage.setItem("version", twitter.version);
-        //    new Notification("Twitter Notifier Updated!", {
-        //        icon: "images/48.png",
-        //        body: "Twitter Notifier has been updated to the latest and greatest version!"
+        //    new Notification("Twitter Notification Updated!", {
+        //        icon: "images/update.png",
+        //        body: "Twitter Notification has been updated to the latest and greatest version!"
         //    })
         //}
         twitter.setup()
