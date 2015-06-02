@@ -1,6 +1,6 @@
 var twitter = {};
 var accounts = store.get("accounts") || [];
-twitter.version = "1.0";
+twitter.version = "1.1";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
 twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
@@ -323,7 +323,7 @@ function connectionError() {
         document.location.reload();
     }, 60000)
 }
-twitter.abortStream = function(account) {
+twitter.abortStream = function (account) {
     logInConsole("Abort Stream", true)
     account.stream.connection.abort();
     clearTriggerCheckStream();
@@ -756,7 +756,10 @@ twitter.notify = function (d, b) {
         }
     } else {
         logInConsole("ACCOUNT: @" + d.screenName + " - Twitter: @" + f.user.screen_name + ", message: " + f.text);
-        var a = new Notification(f.user.name + " : @" + d.screenName, {icon: f.user.profile_image_url_https, body: f.text});
+        var a = new Notification(f.user.name + " : @" + d.screenName, {
+            icon: f.user.profile_image_url_https,
+            body: f.text
+        });
         a.onclick = function () {
             chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
         };
@@ -836,18 +839,18 @@ $(document).ready(function () {
             }
             localStorage.setItem("firstRun", true)
         }
-        //if (localStorage.getItem("version") < twitter.version) {
-        //    localStorage.setItem("version", twitter.version);
-        //    new Notification("Twitter Notification Updated!", {
-        //        icon: "images/update.png",
-        //        body: "Twitter Notification has been updated to the latest and greatest version!"
-        //    })
-        //}
+        if (localStorage.getItem("version") < twitter.version) {
+            localStorage.setItem("version", twitter.version);
+            new Notification("Twitter Notification Updated!", {
+                icon: "images/update.png",
+                body: "Twitter Notification has been updated to the latest and greatest version!"
+            })
+        }
         twitter.setup()
     }
 });
 
-logInConsole = function(message, isDebug) {
+logInConsole = function (message, isDebug) {
     if (message != null) {
         if (isDebug) {
             if (localStorage.debug == "true") {
