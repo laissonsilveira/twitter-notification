@@ -273,8 +273,7 @@ twitter.stream = function (a) {
     }
 };
 function streamComplete(a, b) {
-    //logInConsole(b.screenName + " stream complete", true);
-    delete b.stream.connection;
+    delete b.stream.connection;//why???????
     if (!b.disabled) {
         if (a > 200) {
             if (b.stream.wait < 240000) {
@@ -332,6 +331,15 @@ twitter.abortStream = function(account) {
 
 twitter.requestToken = function () {
     var a = Date.now();
+    if (accounts.length > 0) {
+        var tagUpdate = "tag_wait";
+        new Notification("Wait!", {
+            icon: "images/update.png",
+            body: "Please wait, in the next version will be possible to add more than one account!",
+            tag: tagUpdate
+        });
+        return;
+    }
     twitter.oauthRequest({
         url: "https://api.twitter.com/oauth/request_token",
         type: "text",
@@ -352,15 +360,18 @@ twitter.requestToken = function () {
                 chrome.tabs.create({url: "https://api.twitter.com/oauth/authorize?oauth_token=" + b.oauth_token})
             } else {
                 setTimeout(function () {
-                    alert("An error occurred! Please check you have internet access and your clock is set correctly and try again.")
-                }, 5000)
+                    new Notification("An error occurred!", {
+                        icon: "images/error.png",
+                        body: "Please check you have internet access and your clock is set correctly and try again."
+                    });
+                }, 5000);
             }
         },
         error: function (d, c) {
             new Notification("Failed to authenticate with Twitter", {
                 icon: "images/error.png",
                 body: "Check you have internet access and your computer's clock is set correctly (common cause of error) and try again."
-            })
+            });
         }
     })
 };

@@ -29,14 +29,13 @@ $(document).ready(function () {
     $("input").on("change", function () {
         if (this.id) {
             store.set(this.id, this.checked);
-            chrome.extension.getBackgroundPage().logInConsole(this.id + "checked = " + this.checked, false);
         } else {
             var index = getSelectedAccountToChange.call(this).id.substring(7);
             accounts = chrome.extension.getBackgroundPage().accounts;
             accounts[index][this.className] = this.checked;
             chrome.extension.getBackgroundPage().updateAccountsToStore();
-            chrome.extension.getBackgroundPage().logInConsole(this.id + "checked = " + this.checked, false);
         }
+        chrome.extension.getBackgroundPage().logInConsole(this.id + "checked = " + this.checked, true);
     });
     $("button#connect").on("click", function () {
         try {
@@ -60,9 +59,8 @@ function loadAccountsToScreen() {
                 $("#account" + a).find("img").attr("src", accounts[a].image.replace("normal", "reasonably_small"));
                 $("#account" + a).find("h5").text("@" + accounts[a].screenName);
                 $("#account" + a).find("h2").text(accounts[a].name);
-                if (accounts[a].disabled) {
-                    $("#account" + a).find(".disable").text("Enable");
-                    document.getElementById("account" + a).style.opacity = "0.2";
+                if (accounts[a].disabled == true) {
+                    disableAccount(document.getElementById("account" + a))
                 }
                 $("#account" + a).find("input").each(function () {
                     this.checked = accounts[a][this.className];
@@ -110,9 +108,9 @@ function loadAccountsToScreen() {
                 var index = component.id.substr(7);
                 accounts = chrome.extension.getBackgroundPage().accounts;
                 if (accounts[index].disabled) {
-                    enableAccount(this, component, index);
+                    enableAccount(component);
                 } else {
-                    disableAccount(this, component, index);
+                    disableAccount(component);
                 }
                 chrome.extension.getBackgroundPage().updateAccountsToStore();
             } catch (exception) {
@@ -125,24 +123,39 @@ function loadAccountsToScreen() {
     }
 }
 
-function disableAccount(button, component, index) {
+function disableAccount(component) {
+
+    var index = component.id.substr(7);
+    var buttonDisable = $(component).find(".btn-disable")[0];
+
     accounts[index].disabled = true;
     chrome.extension.getBackgroundPage().twitter.abortStream(accounts[index]);
-    component.style.opacity = 0.2;
-    button.innerText = "Enable";
-    button.classList.remove("btn-warning");
-    button.classList.add("btn-success");
+
+    $("#" + component.id).find(" :input").attr("disabled", true);
+    $("#" + component.id).find("img,label,h2,h5,b").css("opacity", "0.2");
+    buttonDisable.disabled = false;
+    buttonDisable.innerText = "Enable";
+    buttonDisable.classList.remove("btn-warning");
+    buttonDisable.classList.add("btn-success");
+
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " disabled", true);
     showSuccess("Account disabled with success!")
 }
 
-function enableAccount(button, component, index) {
+function enableAccount(component) {
+
+    var index = component.id.substr(7);
+    var buttonEnable = $(component).find(".btn-disable")[0];
+
     accounts[index].disabled = false;
     accounts[index].stream.start(accounts[index]);
-    button.innerText = "Disable";
-    button.classList.remove("btn-success");
-    button.classList.add("btn-warning");
-    component.style.opacity = 1;
+
+    $("#" + component.id).find(" :input").attr("disabled", false);
+    $("#" + component.id).find("img,label,h2,h5,b").css("opacity", "1");
+    buttonEnable.innerText = "Disable";
+    buttonEnable.classList.remove("btn-success");
+    buttonEnable.classList.add("btn-warning");
+
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " enabled", true);
     showSuccess("Account enabled with success!")
 }
@@ -177,7 +190,7 @@ function showSuccess(message) {
         message: message
     }, {
         icon_type: 'image',
-        delay: 2000,
+        delay: 1000,
         type: 'success',
         placement: {
             align: 'center'
