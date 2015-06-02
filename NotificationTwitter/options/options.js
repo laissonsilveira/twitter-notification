@@ -44,6 +44,13 @@ $(document).ready(function () {
             showError(exception);
         }
     });
+    $("li").on("click", function () {
+        try {
+            loadPage(this);
+        } catch (exception) {
+            showError(exception);
+        }
+    });
 
     function getSelectedAccountToChange() {
         return this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
@@ -121,6 +128,37 @@ function loadAccountsToScreen() {
             componentToLogout = getSelectedAccountToAction.call(this);
         });
     }
+}
+
+function loadPage(page) {
+    $("li.active").removeClass("active");
+    page.classList.add("active");
+
+    var pageID = $(page).find("a").attr("href");
+
+    switch (pageID) {
+        case "#add":
+            $("#add").show();
+            $("#about").hide();
+            $("#contact").hide();
+            break;
+
+        case "#about":
+            $("#add").hide();
+            $("#about").show();
+            $("#contact").hide();
+            break;
+
+        case "#contact":
+            $("#add").hide();
+            $("#about").hide();
+            $("#contact").show();
+            break;
+
+        default:
+            break;
+    }
+
 }
 
 function disableAccount(component) {

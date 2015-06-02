@@ -18,28 +18,40 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Add Twitter</a></li>
+                <li class="active"><a href="#add">Add Twitter</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<!--Add-->
+<div id="add" class="container">
+    <section>
+        <h3 style="padding-top: 40px">Active Accounts</h3>
+        <div id="accountList"></div>
+    </section>
+    <button id="connect" class="btn btn-primary">Connect new Twitter</button>
+</div>
+<!--About-->
+<div id="about" class="container" style="display:none">
+    <section>
+        <h3 style="padding-top: 40px">About</h3>
+    </section>
+</div>
+<!--Contact-->
+<div id="contact" class="container" style="display:none">
+    <section>
+        <h3 style="padding-top: 40px">Contact</h3>
+    </section>
+</div>
+<!--Footer-->
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
         <div class="navbar-text-pull-center">
             <a href="mailto:laisson.r.silveira@gmail.com">Laisson R. Silveira - Copyright© 2015</a>
         </div>
     </div>
-</div>
-
-<div class="container">
-    <section>
-        <h3 style="padding-top: 40px">Active Accounts</h3>
-        <div id="accountList"></div>
-    </section>
-    <button id="connect" class="btn btn-primary">Connect new Twitter</button>
-    <hr/>
 </div>
 <!--Accounts-->
 <div class="form-group settings-list account" id="accountTemplate" style="display:none">
