@@ -1,6 +1,6 @@
 var twitter = {};
 var accounts = store.get("accounts") || [];
-twitter.version = "1.1";
+twitter.version = "1.0";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
 twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
@@ -800,7 +800,7 @@ $(document).ready(function () {
         if (!localStorage.getItem("firstRun")) {
             logInConsole("FirstRun", true);
             if (!localStorage.getItem("version")) {
-                chrome.tabs.create({url: "options/options.html"});
+                chrome.tabs.create({url: "options.html"});
                 localStorage.setItem("timeout", 10);
                 //localStorage.setItem("fontSize", 13);
                 localStorage.setItem("version", twitter.version);

@@ -204,7 +204,7 @@ function setVersionTitle() {
 
 function showError(message) {
     $.notify({
-        icon: '/images/error_48.png',
+        icon: '/images/error_32.png',
         title: '<strong>Error!</strong>',
         message: message
     }, {
@@ -223,7 +223,7 @@ function showError(message) {
 
 function showSuccess(message) {
     $.notify({
-        icon: '/images/48.png',
+        icon: '/images/32.png',
         title: '<strong>Sucess!</strong>',
         message: message
     }, {

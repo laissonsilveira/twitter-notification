@@ -1,3 +1,8 @@
+/*!
+ * Bootstrap v3.3.4 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ *//*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
@@ -4474,13 +4479,6 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
     }
 }
 
-.navbar-text-pull-center {
-    color: #9d9d9d;
-    float: none;
-    margin: 15px;
-    text-align: center
-}
-
 .navbar-fixed-top {
     top: 0;
     border-width: 0 0 1px
@@ -7046,4 +7044,12 @@ button.close {
     .hidden-print {
         display: none !important
     }
+}
+
+/*personalisado by lyon*/
+.navbar-text-pull-center {
+    color: #9d9d9d;
+    float: none;
+    margin: 15px;
+    text-align: center
 }
