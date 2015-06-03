@@ -26,8 +26,8 @@
 }
 
 .avatar img {
-    -webkit-border-radius: 5px;
-    -webkit-box-shadow: 3px -3px 3px 3px #CCC;
+    -webkit-box-shadow: 0px 0px 3px 3px #CCC;
+    border-radius: 50%;
 }
 
 .account {

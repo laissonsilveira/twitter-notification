@@ -756,7 +756,7 @@ twitter.notify = function (d, b) {
         }
     } else {
         logInConsole("ACCOUNT: @" + d.screenName + " - Twitter: @" + f.user.screen_name + ", message: " + f.text);
-        var a = new Notification(f.user.name + " : @" + d.screenName, {
+        var a = new Notification(f.user.name, {
             icon: f.user.profile_image_url_https,
             body: f.text
         });

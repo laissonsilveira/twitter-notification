@@ -139,19 +139,19 @@ function loadPage(page) {
     switch (pageID) {
         case "#add":
             $("#add").show();
-            $("#about").hide();
+            $("#releases").hide();
             $("#contact").hide();
             break;
 
-        case "#about":
+        case "#releases":
             $("#add").hide();
-            $("#about").show();
+            $("#releases").show();
             $("#contact").hide();
             break;
 
         case "#contact":
             $("#add").hide();
-            $("#about").hide();
+            $("#releases").hide();
             $("#contact").show();
             break;
 
