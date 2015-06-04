@@ -1,3 +1,9 @@
+function NotFoundError(message) {
+    this.name = "NotFoundError";
+    this.message = (message || "");
+}
+NotFoundError.prototype = Error.prototype;
+
 var twitter = {};
 var accounts = store.get("accounts") || [];
 twitter.version = "1.0";
@@ -207,6 +213,10 @@ function checkStream(a) {
                 + ", lastIndex: " + ", index: " + a.stream.index + " }", true);
         }
         a.stream.lastIndex = a.stream.index;
+    } else {
+        var msg = "Connection not found!";
+        logInConsole(msg);
+        throw new NotFoundError(msg);
     }
 }
 function intervalTrigger(d) {
@@ -273,6 +283,9 @@ twitter.stream = function (a) {
     }
 };
 function streamComplete(a, b) {
+    logInConsole("Stream complete...", true);
+    logInConsole(a, true);
+    logInConsole(b, true);
     delete b.stream.connection;//why???????
     if (!b.disabled) {
         if (a > 200) {
@@ -325,7 +338,14 @@ function connectionError() {
 }
 twitter.abortStream = function (account) {
     logInConsole("Abort Stream", true)
-    account.stream.connection.abort();
+    if (account.stream && account.stream.connection) {
+        account.stream.connection.abort();
+    } else {
+        var msg = "Stream not yet open. Try again.";
+        logInConsole(msg);
+        clearTriggerCheckStream();
+        throw new NotFoundError(msg, "StreamNotFound");
+    }
     clearTriggerCheckStream();
 }
 
@@ -800,7 +820,7 @@ $(document).ready(function () {
         if (!localStorage.getItem("firstRun")) {
             logInConsole("FirstRun", true);
             if (!localStorage.getItem("version")) {
-                chrome.tabs.create({url: "options.html"});
+                chrome.tabs.create({url: "html/options.html"});
                 localStorage.setItem("timeout", 10);
                 //localStorage.setItem("fontSize", 13);
                 localStorage.setItem("version", twitter.version);

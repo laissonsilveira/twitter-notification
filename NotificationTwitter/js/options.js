@@ -104,7 +104,6 @@ function loadAccountsToScreen() {
                 loadAccountsToScreen();
                 showSuccess("Account logout with success!")
             } catch (exception) {
-                chrome.extension.getBackgroundPage().logInConsole(exception, false);
                 showError(exception);
             }
             accounts = chrome.extension.getBackgroundPage().accounts;
@@ -202,11 +201,42 @@ function setVersionTitle() {
     $(".navbar-brand").append(" " + chrome.extension.getBackgroundPage().twitter.version);
 }
 
+function showWarning(message) {
+    $.notify({
+        icon: '/images/warning_32.png',
+        title: '<strong>Warning:</strong>',
+        message: message
+    }, {
+        icon_type: 'image',
+        delay: 3000,
+        type: 'warning',
+        placement: {
+            align: 'center'
+        },
+        animate: {
+            enter: "animated fadeInUp",
+            exit: "animated fadeOutDown"
+        }
+    });
+}
+
 function showError(message) {
+    chrome.extension.getBackgroundPage().logInConsole(message, false);
+
+    var msg = message;
+
+    if (message.message) {
+        msg = message.message;
+        if (message.name == chrome.extension.getBackgroundPage().NotFoundError.name) {
+            showWarning(msg);
+            return;
+        }
+    }
+
     $.notify({
         icon: '/images/error_32.png',
-        title: '<strong>Error!</strong>',
-        message: message
+        title: '<strong>Error:</strong>',
+        message: msg
     }, {
         icon_type: 'image',
         delay: 3000,
@@ -224,7 +254,7 @@ function showError(message) {
 function showSuccess(message) {
     $.notify({
         icon: '/images/32.png',
-        title: '<strong>Sucess!</strong>',
+        title: '<strong>Sucess:</strong>',
         message: message
     }, {
         icon_type: 'image',
