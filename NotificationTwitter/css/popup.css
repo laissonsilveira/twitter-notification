@@ -1,0 +1,43 @@
+body {
+    width: 300px;
+    padding: 50px 0px 10px 0px;
+}
+
+table {
+    width: 100%;
+}
+
+.title-nav-bar {
+    color: white;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.navbar-inverse-popup {
+    background-color: #3c8ac0;
+}
+
+.title-popup {
+    padding-top: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.title-popup img {
+    padding-right: 5px;
+}
+
+.popup-template {
+    height: inherit !important;
+}
+
+.popup-template img {
+    float: right;
+    -webkit-box-shadow: 0px 0px 1px 1px #CCC;
+    border-radius: 50%;
+}
+
+.name-account {
+    font-weight: bold;
+    text-align: right;
+}

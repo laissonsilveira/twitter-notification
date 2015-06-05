@@ -344,7 +344,7 @@ twitter.abortStream = function (account) {
         var msg = "Stream not yet open. Try again.";
         logInConsole(msg);
         clearTriggerCheckStream();
-        throw new NotFoundError(msg, "StreamNotFound");
+        throw new NotFoundError(msg);
     }
     clearTriggerCheckStream();
 }

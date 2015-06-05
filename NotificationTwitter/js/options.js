@@ -21,22 +21,6 @@ $(document).ready(function () {
             }
         }
     }, 3000);
-    $("input").each(function () {
-        if (this.id) {
-            this.checked = store.get(this.id);
-        }
-    });
-    $("input").on("change", function () {
-        if (this.id) {
-            store.set(this.id, this.checked);
-        } else {
-            var index = getSelectedAccountToChange.call(this).id.substring(7);
-            accounts = chrome.extension.getBackgroundPage().accounts;
-            accounts[index][this.className] = this.checked;
-            chrome.extension.getBackgroundPage().updateAccountsToStore();
-        }
-        chrome.extension.getBackgroundPage().logInConsole(this.id + "checked = " + this.checked, true);
-    });
     $("button#connect").on("click", function () {
         try {
             chrome.extension.getBackgroundPage().twitter.requestToken();
@@ -51,13 +35,14 @@ $(document).ready(function () {
             showError(exception);
         }
     });
-
-    function getSelectedAccountToChange() {
-        return this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    }
 });
 
 function loadAccountsToScreen() {
+    $("button.btn-confirm-logout").off();
+    $("button.btn-disable").off();
+    $("button.btn-logout").off();
+    $("input").off();
+
     $("#accountList").html("");
     try {
         for (var a in accounts) {
@@ -80,16 +65,15 @@ function loadAccountsToScreen() {
     } catch (exception) {
         showError(exception);
     }
-    function getSelectedAccountToAction() {
-        return this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    }
 
     if (accounts.length == 0) {
         $("#accountList").html('<div class="container jumbotron account"><span>No accounts connected</span></div>');
     } else {
         $("button.btn-confirm-logout").on("click", function () {
             if (typeof componentToLogout == "undefined") {
-                chrome.extension.getBackgroundPage().logInConsole("Account not found!", false);
+                var msg = "Account not found!";
+                chrome.extension.getBackgroundPage().logInConsole(msg, false);
+                showWarning(msg);
                 return;
             }
             try {
@@ -110,7 +94,7 @@ function loadAccountsToScreen() {
         });
         $("button.btn-disable").on("click", function () {
             try {
-                var component = getSelectedAccountToAction.call(this);
+                var component = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
                 var index = component.id.substr(7);
                 accounts = chrome.extension.getBackgroundPage().accounts;
                 if (accounts[index].disabled) {
@@ -123,8 +107,27 @@ function loadAccountsToScreen() {
                 showError(exception);
             }
         });
+        function getSelectedAccountToChange() {
+            return this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+        }
         $("button.btn-logout").on("click", function () {
-            componentToLogout = getSelectedAccountToAction.call(this);
+            componentToLogout = getSelectedAccountToChange.call(this);
+        });
+        $("input").each(function () {
+            if (this.id) {
+                this.checked = store.get(this.id);
+            }
+        });
+        $("input").on("change", function () {
+            if (this.id) {
+                store.set(this.id, this.checked);
+            } else {
+                var index = getSelectedAccountToChange.call(this).id.substring(7);
+                accounts = chrome.extension.getBackgroundPage().accounts;
+                accounts[index][this.className] = this.checked;
+                chrome.extension.getBackgroundPage().updateAccountsToStore();
+            }
+            chrome.extension.getBackgroundPage().logInConsole(this.id + "checked = " + this.checked, true);
         });
     }
 }
@@ -172,7 +175,7 @@ function disableAccount(component) {
     $("#" + component.id).find("img,label,h2,h5,b").css("opacity", "0.2");
     buttonDisable.disabled = false;
     buttonDisable.innerText = "Enable";
-    buttonDisable.classList.remove("btn-warning");
+    buttonDisable.classList.remove("btn-default");
     buttonDisable.classList.add("btn-success");
 
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " disabled", true);
@@ -191,7 +194,7 @@ function enableAccount(component) {
     $("#" + component.id).find("img,label,h2,h5,b").css("opacity", "1");
     buttonEnable.innerText = "Disable";
     buttonEnable.classList.remove("btn-success");
-    buttonEnable.classList.add("btn-warning");
+    buttonEnable.classList.add("btn-default");
 
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " enabled", true);
     showSuccess("Account enabled with success!")
