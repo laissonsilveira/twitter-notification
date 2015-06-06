@@ -20,13 +20,25 @@ function addAccountsToScreenPopup(accounts) {
                 $("#account" + index).find(".name-account").text("@" + accounts[index].screenName);
                 $("#account" + index).find("img").attr("src", accounts[index].image.replace("normal", "reasonably_small"));
                 $("#accountPopupTemplate").find(".on-off-account").attr("id", "enableAccount" + index);
-                var on = accounts[index].disabled == false;
+                var on = (accounts[index].disabled == false);
                 $(".on-off-account").bootstrapSwitch("state", on);
             }
             $('.on-off-account').on('switchChange.bootstrapSwitch', function (e, onOff) {
                 chrome.extension.getBackgroundPage().accounts[index].disabled = !onOff;
-                chrome.extension.getBackgroundPage().twitter.abortStream(chrome.extension.getBackgroundPage().accounts[index]);
-                chrome.extension.getBackgroundPage().updateAccountsToStore();
+                if (onOff) {
+                    chrome.extension.getBackgroundPage().twitter.startStream(index);
+                } else {
+                    chrome.extension.getBackgroundPage().twitter.abortStream(index);
+                }
+                chrome.extension.getBackgroundPage().twitter.updateAccountsToStore();
+
+                var views = chrome.extension.getViews();
+                for (var w in  views) {
+                    var href = views[w].location.href;
+                    if (href.search("/html/options.html") != -1) {
+                        views[w].document.location.reload();
+                    }
+                }
                 chrome.extension.getBackgroundPage().logInConsole("Changed account enable/disable: " + onOff, true);
             });
             chrome.extension.getBackgroundPage().logInConsole("Add to screen popup Account: @" + accounts[index].screenName, true);

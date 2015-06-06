@@ -13,9 +13,10 @@ twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
 twitter.setup = function () {
     for (var a in accounts) {
         if (!accounts[a].accessToken) {
+            logInConsole("Account without accessToken! Splice, updateStore and reload.", true);
             accounts.splice(a, 1);
-            updateAccountsToStore();
-            document.location.reload()
+            twitter.updateAccountsToStore();
+            document.location.reload();
         } else {
             twitter.loadAccount(accounts[a])
         }
@@ -54,16 +55,18 @@ twitter.oauthRequest = function (d) {
             xhr: function () {
                 d.account.stream.connection = new XMLHttpRequest();
                 d.account.stream.connection.addEventListener("progress", function () {
-                    processResponse(d.account);
+                    twitter.processResponse(d.account);
                 }, false);
                 return d.account.stream.connection;
             },
             complete: function (f, g) {
-                streamComplete(f.status, d.account);
+                twitter.streamComplete(f.status, d.account);
             }
         });
-        intervalTrigger(d);
+        twitter.intervalTrigger(d);
     } else {
+        logInConsole("Send request authorization...");
+        logInConsole(d, true);
         var e = true;
         if (d.media) {
             e = false;
@@ -100,8 +103,9 @@ twitter.oauthRequest = function (d) {
         })
     }
 };
-function processResponse(f) {
-    //logInConsole(f, true);
+twitter.processResponse = function(f) {
+    logInConsole("Process response...", true);
+    logInConsole(f, true);
     f.stream.response = f.stream.connection.responseText.split("\r");
     while (f.stream.response[f.stream.index + 1]) {
         if (f.stream.response[f.stream.index].length > 1) {
@@ -204,28 +208,28 @@ function processResponse(f) {
         f.stream.index++
     }
 }
-function checkStream(a) {
+twitter.checkStream = function(account) {
     logInConsole("Checking stream activity...", true);
-    if (a.stream.connection) {
-        if (a.stream.connection.responseText.length > 5000000 || a.stream.lastIndex == a.stream.index) {
-            a.stream.connection.abort();
-            logInConsole("Abort Stream by checkStream(){ responseText: " + a.stream.connection.responseText.length
-                + ", lastIndex: " + ", index: " + a.stream.index + " }", true);
+    if (account.stream.connection) {
+        if (account.stream.connection.responseText.length > 5000000 || account.stream.lastIndex == account.stream.index) {
+            account.stream.connection.abort();
+            logInConsole("Abort Stream by checkStream(){ responseText: " + account.stream.connection.responseText.length
+                + ", lastIndex: " + ", index: " + account.stream.index + " }", true);
         }
-        a.stream.lastIndex = a.stream.index;
+        account.stream.lastIndex = account.stream.index;
     } else {
         var msg = "Connection not found!";
         logInConsole(msg);
         throw new NotFoundError(msg);
     }
 }
-function intervalTrigger(d) {
+twitter.intervalTrigger = function(d) {
     idTriggerCheckInterval = setInterval(function () {
-        checkStream(d.account);
+        twitter.checkStream(d.account);
     }, 45000);
     logInConsole("Create trigger check stream: id = " + idTriggerCheckInterval);
 }
-function updateAccountsToStore() {
+twitter.updateAccountsToStore = function() {
     logInConsole("updateAccountsToStore", true);
     var a = [];
     for (var b in accounts) {
@@ -238,7 +242,7 @@ function updateAccountsToStore() {
         store.set("accounts", a);
     }
 }
-function clearTriggerCheckStream() {
+twitter.clearTriggerCheckStream = function() {
     if (idTriggerCheckInterval) {
         logInConsole("Clear trigger check stream: id = " + idTriggerCheckInterval);
         clearInterval(idTriggerCheckInterval);
@@ -282,7 +286,10 @@ twitter.stream = function (a) {
         twitter.oauthRequest({url: "https://userstream.twitter.com/1.1/user.json", stream: true, account: b})
     }
 };
-function streamComplete(a, b) {
+twitter.startStream = function(index) {
+    accounts[index].stream.start(accounts[index]);
+}
+twitter.streamComplete = function(a, b) {
     logInConsole("Stream complete...", true);
     logInConsole(a, true);
     logInConsole(b, true);
@@ -316,7 +323,7 @@ function streamComplete(a, b) {
                 }, b.stream.wait);
                 b.stream.wait += 10000
             } else {
-                connectionError()
+                twitter.connectionError()
             }
         }
         b.waitReset = setTimeout(function () {
@@ -324,7 +331,7 @@ function streamComplete(a, b) {
         }, 320000)
     }
 }
-function connectionError() {
+twitter.connectionError = function() {
     var a = new Notification("Connection Error", {
         icon: "images/error",
         body: "Twitter Notification couldn't connect to Twitter - are you sure you're connected to the internet? Connection will be tried again in 1 minute."
@@ -336,17 +343,17 @@ function connectionError() {
         document.location.reload();
     }, 60000)
 }
-twitter.abortStream = function (account) {
+twitter.abortStream = function (index) {
     logInConsole("Abort Stream", true)
-    if (account.stream && account.stream.connection) {
-        account.stream.connection.abort();
+    if (accounts[index].stream && accounts[index].stream.connection) {
+        accounts[index].stream.connection.abort();
     } else {
         var msg = "Stream not yet open. Try again.";
         logInConsole(msg);
-        clearTriggerCheckStream();
+        twitter.clearTriggerCheckStream();
         throw new NotFoundError(msg);
     }
-    clearTriggerCheckStream();
+    twitter.clearTriggerCheckStream();
 }
 
 twitter.requestToken = function () {
@@ -375,7 +382,7 @@ twitter.requestToken = function () {
                 b[e[0]] = e[1]
             }
             accounts.push({requestToken: b.oauth_token, requestTokenSecret: b.oauth_token_secret, timestamp: a});
-            updateAccountsToStore();
+            twitter.updateAccountsToStore();
             if (b.oauth_token) {
                 chrome.tabs.create({url: "https://api.twitter.com/oauth/authorize?oauth_token=" + b.oauth_token})
             } else {
@@ -444,7 +451,7 @@ twitter.accessToken = function (a, e) {
                     body: "That account has already been connected to Twitter Notification."
                 });
             }
-            updateAccountsToStore();
+            twitter.updateAccountsToStore();
             chrome.tabs.getCurrent(function (i) {
                 chrome.tabs.remove(i.id)
             })
@@ -452,6 +459,7 @@ twitter.accessToken = function (a, e) {
     })
 };
 twitter.loadAccount = function (a) {
+    logInConsole("Load Account...", true);
     twitter.oauthRequest({
         url: twitter.apiRoot + "account/verify_credentials.json", account: a, success: function (c) {
             try {
@@ -465,12 +473,12 @@ twitter.loadAccount = function (a) {
                 }
                 logInConsole("Updating accounts store", true);
                 logInConsole("Account @" + c.screen_name + " load", true);
-                updateAccountsToStore();
+                twitter.updateAccountsToStore();
                 if (!a.disabled) {
                     a.stream.start(a)
                 }
             } catch (b) {
-                connectionError()
+                twitter.connectionError()
             }
         }, error: function (c, b) {
             new Notification("Could not authenticate user @" + a.screenName, {
@@ -855,7 +863,7 @@ $(document).ready(function () {
                 localStorage.removeItem("notifyDm");
                 localStorage.removeItem("notifyTweet");
                 localStorage.removeItem("notifyMention");
-                updateAccountsToStore()
+                twitter.updateAccountsToStore()
             }
             localStorage.setItem("firstRun", true)
         }
