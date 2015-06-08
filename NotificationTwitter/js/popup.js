@@ -51,12 +51,9 @@ function addAccountsToScreenPopup(accounts) {
 
 $(document).ready(function () {
 
-    setVersionTitlePopup()
+    setVersionTitlePopup();
 
-    var accounts = store.get("accounts");
-    if (!accounts) {
-        accounts = [];
-    }
+    var accounts = store.get("accounts") || [];
     onClickOpenOptionsButton();
     addAccountsToScreenPopup(accounts);
 });

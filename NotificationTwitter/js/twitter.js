@@ -46,7 +46,7 @@ twitter.oauthRequest = function (d) {
     OAuth.setTimestampAndNonce(message);
     OAuth.SignatureMethod.sign(message, accessor);
     if (d.stream) {
-        logInConsole("Opening user stream for user " + d.account.screenName, true);
+        chrome.extension.getBackgroundPage().logInConsole("Opening user stream for user " + d.account.screenName, true);
         $.ajax({
             url: message.action,
             type: message.method,
@@ -65,8 +65,8 @@ twitter.oauthRequest = function (d) {
         });
         twitter.intervalTrigger(d);
     } else {
-        logInConsole("Send request authorization...");
-        logInConsole(d, true);
+        chrome.extension.getBackgroundPage().logInConsole("Send request authorization...");
+        chrome.extension.getBackgroundPage().logInConsole(d, true);
         var e = true;
         if (d.media) {
             e = false;
@@ -104,8 +104,8 @@ twitter.oauthRequest = function (d) {
     }
 };
 twitter.processResponse = function(f) {
-    logInConsole("Process response...", true);
-    logInConsole(f, true);
+    chrome.extension.getBackgroundPage().logInConsole("Process response...", true);
+    chrome.extension.getBackgroundPage().logInConsole(f, true);
     f.stream.response = f.stream.connection.responseText.split("\r");
     while (f.stream.response[f.stream.index + 1]) {
         if (f.stream.response[f.stream.index].length > 1) {
@@ -213,8 +213,8 @@ twitter.checkStream = function(account) {
     if (account.stream.connection) {
         if (account.stream.connection.responseText.length > 5000000 || account.stream.lastIndex == account.stream.index) {
             account.stream.connection.abort();
-            logInConsole("Abort Stream by checkStream(){ responseText: " + account.stream.connection.responseText.length
-                + ", lastIndex: " + ", index: " + account.stream.index + " }", true);
+            logInConsole("Abort Stream by checkStream(){ responseText: " + account.stream.connection.responseText
+                + ", lastIndex: " + account.stream.lastIndex + ", index: " + account.stream.index + " }", true);
         }
         account.stream.lastIndex = account.stream.index;
     } else {
@@ -237,7 +237,7 @@ twitter.updateAccountsToStore = function() {
         delete a[b].stream;
     }
     if (!a.length) {
-        store.set("accounts", "");
+        store.set("accounts", []);
     } else {
         store.set("accounts", a);
     }
@@ -290,9 +290,9 @@ twitter.startStream = function(index) {
     accounts[index].stream.start(accounts[index]);
 }
 twitter.streamComplete = function(a, b) {
-    logInConsole("Stream complete...", true);
-    logInConsole(a, true);
-    logInConsole(b, true);
+    chrome.extension.getBackgroundPage().logInConsole("Stream complete...", true);
+    chrome.extension.getBackgroundPage().logInConsole(a, true);
+    chrome.extension.getBackgroundPage().logInConsole(b, true);
     delete b.stream.connection;//why???????
     if (!b.disabled) {
         if (a > 200) {
@@ -344,9 +344,10 @@ twitter.connectionError = function() {
     }, 60000)
 }
 twitter.abortStream = function (index) {
-    logInConsole("Abort Stream", true)
+    logInConsole("Abort Stream...", true)
     if (accounts[index].stream && accounts[index].stream.connection) {
         accounts[index].stream.connection.abort();
+        logInConsole("Abort Stream Sucess!!!", true)
     } else {
         var msg = "Stream not yet open. Try again.";
         logInConsole(msg);
@@ -403,7 +404,7 @@ twitter.requestToken = function () {
     })
 };
 twitter.accessToken = function (a, e) {
-    logInConsole("accessToken", true)
+    chrome.extension.getBackgroundPage().logInConsole("accessToken", true)
     accounts = chrome.extension.getBackgroundPage().accounts;
     for (var b in accounts) {
         if (accounts[b].timestamp == e) {
@@ -441,15 +442,9 @@ twitter.accessToken = function (a, e) {
                 d.notifyTweet = true;
                 d.notifyMention = true;
                 chrome.extension.getBackgroundPage().twitter.loadNewAccount(d);
-                new Notification("Authorised!", {
-                    icon: "images/128.png",
-                    body: "Twitter Notification is now authorised and running."
-                });
+                twitter.sendMessageAuthorised();
             } else {
-                new Notification("Not Authorised", {
-                    icon: "images/error.png",
-                    body: "That account has already been connected to Twitter Notification."
-                });
+                twitter.sendMessageNotAuthorised();
             }
             twitter.updateAccountsToStore();
             chrome.tabs.getCurrent(function (i) {
@@ -458,8 +453,20 @@ twitter.accessToken = function (a, e) {
         }
     })
 };
+twitter.sendMessageAuthorised = function() {
+    new Notification("Authorised!", {
+        icon: "images/128.png",
+        body: "Twitter Notification is now authorised and running."
+    });
+}
+twitter.sendMessageNotAuthorised = function() {
+    new Notification("Not Authorised", {
+        icon: "images/error.png",
+        body: "That account has already been connected to Twitter Notification."
+    });
+}
 twitter.loadAccount = function (a) {
-    logInConsole("Load Account...", true);
+    chrome.extension.getBackgroundPage().logInConsole("Load Account...", true);
     twitter.oauthRequest({
         url: twitter.apiRoot + "account/verify_credentials.json", account: a, success: function (c) {
             try {
@@ -471,8 +478,8 @@ twitter.loadAccount = function (a) {
                 if (a.disabled === undefined) {
                     a.disabled = false;
                 }
-                logInConsole("Updating accounts store", true);
-                logInConsole("Account @" + c.screen_name + " load", true);
+                chrome.extension.getBackgroundPage().logInConsole("Updating accounts store", true);
+                chrome.extension.getBackgroundPage().logInConsole("Account @" + c.screen_name + " load", true);
                 twitter.updateAccountsToStore();
                 if (!a.disabled) {
                     a.stream.start(a)
@@ -502,50 +509,6 @@ twitter.getAccountById = function (b) {
         }
     }
 };
-twitter.favourite = function (d, c, b) {
-    var a = twitter.getAccountById(c);
-    twitter.oauthRequest({
-        method: "POST",
-        url: twitter.apiRoot + "favorites/create.json",
-        account: a,
-        parameters: [["id", d]],
-        success: b || function () {
-        },
-        error: function (e) {
-            e = jQuery.parseJSON(e);
-            new Notification("Could not favourite", {icon: "images/error.png", body: "Error: " + e.errors.message})
-        }
-    })
-};
-twitter.unfavourite = function (d, c, b) {
-    var a = twitter.getAccountById(c);
-    twitter.oauthRequest({
-        method: "POST",
-        url: twitter.apiRoot + "favorites/destroy.json",
-        parameters: [["id", d]],
-        account: a,
-        success: b || function () {
-        },
-        error: function (e) {
-            e = jQuery.parseJSON(e);
-            new Notification("Could not unfavourite", {icon: "images/error.png", body: "Error: " + e.errors.message})
-        }
-    })
-};
-twitter.retweet = function (d, c, b) {
-    var a = twitter.getAccountById(c);
-    twitter.oauthRequest({
-        method: "POST",
-        url: twitter.apiRoot + "statuses/retweet/" + d + ".json",
-        account: a,
-        success: b || function () {
-        },
-        error: function (e) {
-            e = jQuery.parseJSON(e);
-            new Notification("Retweet failed", {icon: "images/error.png", body: "Error: " + e.errors.message})
-        }
-    })
-};
 twitter.deleteStatus = function (d, c, b) {
     var a = twitter.getAccountById(c);
     twitter.oauthRequest({
@@ -557,90 +520,6 @@ twitter.deleteStatus = function (d, c, b) {
         error: function (e) {
             e = jQuery.parseJSON(e);
             new Notification("Retweet failed", {icon: "images/error.png", body: "Error: " + e.errors.message})
-        }
-    })
-};
-twitter.update = function (f, c, e, d) {
-    var b = twitter.getAccountById(f);
-    var a = [["status", c]];
-    if (e) {
-        a.push(["in_reply_to_status_id", e])
-    }
-    twitter.oauthRequest({
-        method: "POST",
-        url: twitter.apiRoot + "statuses/update.json",
-        parameters: a,
-        account: b,
-        success: d || function () {
-        },
-        beforeSend: function (h, g) {
-            g.data = g.data.replace(/\-/g, "%2D").replace(/\_/g, "%5F").replace(/\./g, "%2E").replace(/\!/g, "%21").replace(/\*/g, "%2A").replace(/\'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29")
-        },
-        error: function (g, j) {
-            g = jQuery.parseJSON(g);
-            logInConsole(g, false);
-            new Notification("Status could not be sent", {
-                icon: "images/error.png",
-                body: "Error: " + g.errors.message
-            });
-            for (var h in j) {
-                if (j[h][0] == "status") {
-                    j = j[h][1]
-                }
-            }
-            chrome.tabs.create({url: "http://twitter.com/?status=" + j})
-        }
-    })
-};
-twitter.updateWithMedia = function (h, e, d, g, f, a) {
-    var c = twitter.getAccountById(h);
-    var b = [];
-    twitter.oauthRequest({
-        method: "POST",
-        url: "https://upload.twitter.com/1/statuses/update_with_media.json",
-        parameters: b,
-        account: c,
-        media: d,
-        status: e,
-        replyID: g || false,
-        xhr: function () {
-            var i = new XMLHttpRequest();
-            i.upload.addEventListener("progress", a || function () {
-                }, false);
-            return i
-        },
-        success: f || function () {
-        },
-        error: function (j, l) {
-            j = jQuery.parseJSON(j);
-            logInConsole(j, false);
-            new Notification("Status could not be sent", {
-                icon: "images/error.png",
-                body: "Error: " + j.errors.message
-            });
-            for (var k in l) {
-                if (l[k][0] == "status") {
-                    l = l[k][1]
-                }
-            }
-            chrome.tabs.create({url: "http://twitter.com/?status=" + l})
-        }
-    })
-};
-twitter.dm = function (e, b, d, c) {
-    var a = twitter.getAccountById(e);
-    twitter.oauthRequest({
-        method: "POST",
-        url: twitter.apiRoot + "direct_messages/new.json",
-        parameters: [["text", b], ["user_id", d]],
-        account: a,
-        error: function (f) {
-            new Notification("DM Could not be sent", {
-                icon: "images/error.png",
-                body: "Error: " + jQuery.parseJSON(f).errors.message
-            })
-        },
-        success: c || function () {
         }
     })
 };
@@ -717,53 +596,13 @@ twitter.getMessages = function (d) {
                     e.sort(function (h, g) {
                         return new Date(g.created_at) - new Date(h.created_at)
                     });
-                    logInConsole(e, true);
+                    chrome.extension.getBackgroundPage().logInConsole(e, true);
                     d.success(e)
                 },
                 error: d.error || function () {
                 }
             })
         }, error: d.error || function () {
-        }
-    })
-};
-twitter.getUsers = function (b) {
-    var a = twitter.getAccountById(b.accountId);
-    twitter.oauthRequest({
-        method: "POST",
-        url: twitter.apiRoot + "users/lookup.json",
-        account: a,
-        parameters: b.parameters,
-        success: b.success || function () {
-        },
-        error: b.error || function () {
-        }
-    })
-};
-twitter.getFriendships = function (b) {
-    var a = twitter.getAccountById(b.accountId);
-    twitter.oauthRequest({
-        method: "GET",
-        url: twitter.apiRoot + "friendships/show.json",
-        account: a,
-        parameters: b.parameters,
-        success: b.success || function () {
-        },
-        error: b.error || function () {
-        }
-    })
-};
-twitter.getStatus = function (b) {
-    var a = twitter.getAccountById(b.accountId);
-    b.parameters.push(["include_entities", "true"]);
-    twitter.oauthRequest({
-        method: "GET",
-        url: twitter.apiRoot + "statuses/show.json",
-        account: a,
-        parameters: b.parameters,
-        success: b.success || function () {
-        },
-        error: b.error || function () {
         }
     })
 };
@@ -800,13 +639,6 @@ twitter.notify = function (d, b) {
         }, c * 1000)
     }
 };
-twitter.decrementID = function (b) {
-    var a = -1;
-    while (b.substr(a, 1) == "0") {
-        a--
-    }
-    return b.slice(0, a) + (b.substr(a) - 1)
-};
 
 $(document).ready(function () {
     var d = window.location.href.split("?");
@@ -826,11 +658,10 @@ $(document).ready(function () {
         twitter.accessToken(a, c)
     } else {
         if (!localStorage.getItem("firstRun")) {
-            logInConsole("FirstRun", true);
+            chrome.extension.getBackgroundPage().logInConsole("FirstRun", true);
             if (!localStorage.getItem("version")) {
                 chrome.tabs.create({url: "html/options.html"});
                 localStorage.setItem("timeout", 10);
-                //localStorage.setItem("fontSize", 13);
                 localStorage.setItem("version", twitter.version);
                 localStorage.setItem("connectionError", true);
                 localStorage.setItem("debug", true);
