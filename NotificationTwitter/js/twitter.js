@@ -474,10 +474,8 @@ twitter.loadAccount = function (a) {
             try {
                 if (timeoutLoadAccount) {
                     clearTimeout(timeoutLoadAccount);
-                    delete timeoutLoadAccount;
                     if (notifyLoadAccount) {
                         notifyLoadAccount.close();
-                        delete notifyLoadAccount;
                     }
                 }
                 a.id = c.id;
