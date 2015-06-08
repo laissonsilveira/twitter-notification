@@ -293,7 +293,7 @@ twitter.streamComplete = function(a, b) {
     chrome.extension.getBackgroundPage().logInConsole("Stream complete...", true);
     chrome.extension.getBackgroundPage().logInConsole(a, true);
     chrome.extension.getBackgroundPage().logInConsole(b, true);
-    delete b.stream.connection;//why???????
+    delete b.stream.connection;
     if (!b.disabled) {
         if (a > 200) {
             if (b.stream.wait < 240000) {
@@ -323,7 +323,7 @@ twitter.streamComplete = function(a, b) {
                 }, b.stream.wait);
                 b.stream.wait += 10000
             } else {
-                twitter.connectionError()
+                twitter.connectionError();
             }
         }
         b.waitReset = setTimeout(function () {
@@ -468,8 +468,18 @@ twitter.sendMessageNotAuthorised = function() {
 twitter.loadAccount = function (a) {
     chrome.extension.getBackgroundPage().logInConsole("Load Account...", true);
     twitter.oauthRequest({
-        url: twitter.apiRoot + "account/verify_credentials.json", account: a, success: function (c) {
+        url: twitter.apiRoot + "account/verify_credentials.json",
+        account: a,
+        success: function (c) {
             try {
+                if (timeoutLoadAccount) {
+                    clearTimeout(timeoutLoadAccount);
+                    delete timeoutLoadAccount;
+                    if (notifyLoadAccount) {
+                        notifyLoadAccount.close();
+                        delete notifyLoadAccount;
+                    }
+                }
                 a.id = c.id;
                 a.name = c.name;
                 a.screenName = c.screen_name;
@@ -485,13 +495,18 @@ twitter.loadAccount = function (a) {
                     a.stream.start(a)
                 }
             } catch (b) {
-                twitter.connectionError()
+                twitter.connectionError();
             }
-        }, error: function (c, b) {
-            new Notification("Could not authenticate user @" + a.screenName, {
+        },
+        error: function (c, b) {
+            notifyLoadAccount = new Notification("Could not authenticate user @" + a.screenName, {
                 icon: "images/error.png",
-                body: "Twitter Notification failed to authorise this account with Twitter. Try logging out and logging in of this account on the accounts page."
+                body: "Twitter Notification failed to authorise this account with Twitter. Connection will be tried again in 10 seconds...",
+                tag: "loadAccountAgain"
             });
+            timeoutLoadAccount = setTimeout(function () {
+                twitter.loadAccount(a);
+            }, 10000);
         }
     })
 };
