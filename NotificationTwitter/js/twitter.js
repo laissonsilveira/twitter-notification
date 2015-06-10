@@ -6,6 +6,7 @@ NotFoundError.prototype = Error.prototype;
 
 var twitter = {};
 var accounts = store.get("accounts") || [];
+var timeoutLoadAccount, notifyLoadAccount;
 twitter.version = "1.0";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
@@ -307,7 +308,7 @@ twitter.streamComplete = function(a, b) {
                 b.stream.wait *= 2
             } else {
                 notif = new Notification("Twitter Error", {
-                    icon: "images/error",
+                    icon: "images/error.png",
                     body: "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
                 });
                 setTimeout(function () {
@@ -333,7 +334,7 @@ twitter.streamComplete = function(a, b) {
 }
 twitter.connectionError = function() {
     var a = new Notification("Connection Error", {
-        icon: "images/error",
+        icon: "images/error.png",
         body: "Twitter Notification couldn't connect to Twitter - are you sure you're connected to the internet? Connection will be tried again in 1 minute."
     });
     setTimeout(function () {
@@ -620,13 +621,12 @@ twitter.getMessages = function (d) {
     })
 };
 twitter.notify = function (d, b) {
-    var e = {};
     var f = jQuery.parseJSON(d.stream.response[b]);
     var a;
     if (f.direct_message) {
         if (f.direct_message.sender_id != d.id) {
             logInConsole("Twitter: @" + f.direct_message.sender.screen_name + ", message: " + f.direct_message.text);
-            var a = new Notification(f.direct_message.sender.name, {
+            var a = new Notification("Message from @" + f.direct_message.sender.screen_name, {
                 icon: f.direct_message.sender.profile_image_url_https,
                 body: f.direct_message.text
             });
@@ -635,11 +635,19 @@ twitter.notify = function (d, b) {
             };
         }
     } else {
-        logInConsole("ACCOUNT: @" + d.screenName + " - Twitter: @" + f.user.screen_name + ", message: " + f.text);
-        var a = new Notification(f.user.name, {
-            icon: f.user.profile_image_url_https,
-            body: f.text
-        });
+        if (f.in_reply_to_screen_name) {
+            logInConsole("ACCOUNT: @" + d.screenName + " - Twitter: Mentioned by @" + f.user.screen_name + ", message: " + f.text);
+            a = new Notification("Mentioned by @" + f.user.screen_name, {
+                icon: f.user.profile_image_url_https,
+                body: f.text
+            });
+        } else {
+            logInConsole("ACCOUNT: @" + d.screenName + " - Twitter: @" + f.user.screen_name + ", name: " + f.user.name + ", message: " + f.text);
+            a = new Notification(f.user.name + " - @" + f.user.screen_name, {
+                icon: f.user.profile_image_url_https,
+                body: f.text
+            });
+        }
         a.onclick = function () {
             chrome.tabs.create({url: "https://twitter.com/" + f.user.screen_name + "/status/" + f.id_str})
         };

@@ -56,4 +56,8 @@ $(document).ready(function () {
     var accounts = store.get("accounts") || [];
     onClickOpenOptionsButton();
     addAccountsToScreenPopup(accounts);
+
+    setTimeout(function() {
+        $("#openOptions").focus();
+    }, 50);
 });
