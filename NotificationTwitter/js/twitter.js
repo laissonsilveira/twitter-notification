@@ -7,7 +7,7 @@ NotFoundError.prototype = Error.prototype;
 var twitter = {};
 var accounts = store.get("accounts") || [];
 var timeoutLoadAccount, notifyLoadAccount;
-twitter.version = "1.0.1";
+twitter.version = "1.1";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
 twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";

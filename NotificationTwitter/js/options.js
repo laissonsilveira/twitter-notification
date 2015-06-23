@@ -43,7 +43,8 @@ function loadAccountsToScreen() {
     $("#accountList").html("");
 
     if (accounts.length == 0) {
-        $("#accountList").html('<div class="container jumbotron account"><span>No accounts connected</span></div>');
+        var msgAccountNotFound = chrome.i18n.getMessage("msg_account_not_found");
+        $("#accountList").html('<div class="container jumbotron account"><span>' + msgAccountNotFound + '</span></div>');
     } else {
         try {
             for (var a in accounts) {
@@ -70,7 +71,7 @@ function loadAccountsToScreen() {
         $("button.btn-confirm-logout").on("click", function () {
             accounts = getBackgroundAccount();
             if (typeof componentToLogout == "undefined") {
-                var msg = "Account not found!";
+                var msg = chrome.i18n.getMessage("msg_account_not_found");
                 chrome.extension.getBackgroundPage().logInConsole(msg, false);
                 showWarning(msg);
                 return;
@@ -85,7 +86,7 @@ function loadAccountsToScreen() {
                 componentToLogout.parentNode.removeChild(componentToLogout);
                 componentToLogout == undefined;
                 loadAccountsToScreen();
-                showSuccess("Account logout with success!")
+                showSuccess(chrome.i18n.getMessage("msg_account_logout_success"))
             } catch (exception) {
                 showError(exception);
             }
@@ -177,7 +178,7 @@ function disableAccount(component) {
     buttonDisable.classList.add("btn-success");
 
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " disabled", true);
-    showSuccess("Account disabled with success!")
+    showSuccess(chrome.i18n.getMessage("msg_account_disabled_success"));
 }
 
 function enableAccount(component) {
@@ -195,7 +196,7 @@ function enableAccount(component) {
     buttonEnable.classList.add("btn-default");
 
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " enabled", true);
-    showSuccess("Account enabled with success!")
+    showSuccess(chrome.i18n.getMessage("msg_account_enabled_success"));
 }
 
 function setVersionTitle() {
@@ -236,7 +237,7 @@ function showError(message) {
 
     $.notify({
         icon: '/images/error_32.png',
-        title: '<strong>Error:</strong>',
+        title: '<strong>' + chrome.i18n.getMessage("title_msg_error") + '</strong>',
         message: msg
     }, {
         icon_type: 'image',
@@ -255,7 +256,7 @@ function showError(message) {
 function showSuccess(message) {
     $.notify({
         icon: '/images/32.png',
-        title: '<strong>Sucess:</strong>',
+        title: '<strong>' + chrome.i18n.getMessage("title_msg_success") + '</strong>',
         message: message
     }, {
         icon_type: 'image',

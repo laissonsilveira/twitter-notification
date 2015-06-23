@@ -1,0 +1,48 @@
+//chrome.i18n.getMessage("")
+{
+  // Messages
+  "msg_account_not_found" : {
+    "message": "No accounts connected"
+  },
+
+  "msg_account_logout_success" : {
+    "message": "Account logout with success!"
+  },
+
+  "msg_account_enabled_success" : {
+    "message": "Account enabled with success!"
+  },
+
+  "msg_account_disabled_success" : {
+    "message": "Account logout with success!"
+  },
+
+  "title_msg_success" : {
+    "message": "Sucess:"
+  },
+
+  "title_msg_error" : {
+    "message": "Error:"
+  },
+
+  //Navbar
+  "title_navbar" : {
+    "message": "Twitter Notification"
+  },
+
+  "menu_navbar_add_twitter" : {
+    "message": "Add Twitter"
+  },
+
+  "menu_navbar_releases" : {
+    "message": "Releases"
+  },
+
+  "menu_navbar_contact" : {
+    "message": "Contact"
+  }
+  //Buttons
+
+  //Notifications
+
+}

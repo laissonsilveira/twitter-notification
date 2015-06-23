@@ -12,7 +12,8 @@ function addAccountsToScreenPopup(accounts) {
     try {
         $('.on-off-account').off();
         if (accounts.length == 0) {
-            $("#accountListPopup").html('<div class="container jumbotron"><span>No accounts connected</span></div>');
+            var msgAccountNotFound = chrome.i18n.getMessage("msg_account_not_found");
+            $("#accountListPopup").html('<div class="container jumbotron"><span>' + msgAccountNotFound + '</span></div>');
         } else {
             $("#accountListPopup").html("");
             for (var index in accounts) {
