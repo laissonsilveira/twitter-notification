@@ -1,48 +1,116 @@
 //chrome.i18n.getMessage("")
 {
+  "name_extension": {
+    "message": "Twitter Notification"
+  },
+  "label_copyright": {
+    "message": "Laisson R. Silveira - Copyright<i class=\"fa fa-copyright\"></i> 2015"
+  },
+  "title_page_options": {
+    "message": "Options"
+  },
+
   // Messages
-  "msg_account_not_found" : {
+  "msg_account_not_found": {
     "message": "No accounts connected"
   },
-
-  "msg_account_logout_success" : {
+  "msg_account_logout_success": {
     "message": "Account logout with success!"
   },
-
-  "msg_account_enabled_success" : {
+  "msg_account_enabled_success": {
     "message": "Account enabled with success!"
   },
-
-  "msg_account_disabled_success" : {
+  "msg_account_disabled_success": {
     "message": "Account logout with success!"
   },
 
-  "title_msg_success" : {
+  //Title
+  "title_msg_success": {
     "message": "Sucess:"
   },
-
-  "title_msg_error" : {
+  "title_msg_error": {
     "message": "Error:"
+  },
+  "title_msg_warning": {
+    "message": "Warning:"
+  },
+  "title_modal_logout": {
+    "message": "Logout this Account Twitter?"
   },
 
   //Navbar
-  "title_navbar" : {
+  "title_navbar": {
     "message": "Twitter Notification"
   },
-
-  "menu_navbar_add_twitter" : {
+  "menu_navbar_add_twitter": {
     "message": "Add Twitter"
   },
-
-  "menu_navbar_releases" : {
+  "menu_navbar_releases": {
     "message": "Releases"
   },
-
-  "menu_navbar_contact" : {
+  "menu_navbar_contact": {
     "message": "Contact"
-  }
-  //Buttons
+  },
 
-  //Notifications
+  //Buttons
+  "button_connect_twitter": {
+    "message": "Connect with Twitter"
+  },
+  "button_no": {
+    "message": "No"
+  },
+  "button_yes": {
+    "message": "Yes"
+  },
+  "button_enable": {
+    "message": "Enable"
+  },
+  "button_disable": {
+    "message": "Disable"
+  },
+  "button_logout": {
+    "message": "Logout"
+  },
+
+  //Tabs
+  "title_content_add_twitter": {
+    "message": "Active Accounts"
+  },
+  "title_content_releases": {
+    "message": "Releases Note"
+  },
+  // Tab - Contact
+  "title_content_contact": {
+    "message": "Create by Laisson R. Silveira"
+  },
+  "tab_contact_email": {
+    "message": "- laisson.r.silveira@gmail.com"
+  },
+  "tab_contact_location": {
+    "message": "- Brasil, Florianópolis / SC"
+  },
+  "tab_contact_site": {
+    "message": "- http://technova.com.br"
+  },
+  "tab_contact_about": {
+    "message": "About Twitter Notification"
+  },
+  "tab_contact_feedback": {
+    "message": "Send your feedback!"
+  },
+
+  //Item Account
+  "title_item_account": {
+    "message": "Notify for:"
+  },
+  "item_account_tweets": {
+    "message": "Tweets"
+  },
+  "item_account_mentions": {
+    "message": "Mentions"
+  },
+  "item_account_messages": {
+    "message": "Messages"
+  }
 
 }

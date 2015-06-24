@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Twitter Notification - Options</title>
+    <title i18n="title_page_options"></title>
     <link rel="stylesheet" href="../css/accounts.css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../css/social-buttons.css"/>
@@ -17,7 +17,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="http://goo.gl/gFZl3w" target="_blank">Twitter Notification</a>
+            <a class="navbar-brand" href="http://goo.gl/gFZl3w" target="_blank"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -31,23 +31,23 @@
 <!--Add-->
 <div id="add" class="container">
     <section>
-        <legend style="padding-top: 60px">Active Accounts</legend>
+        <legend style="padding-top: 60px" i18n="title_content_add_twitter"></legend>
         <div id="accountList"></div>
     </section>
-    <button id="connect" class="btn btn-social btn-twitter">
-        <i class="fa fa-twitter"></i> Connect with Twitter
+    <button id="connect" class="btn btn-social btn-twitter" i18n="button_connect_twitter">
+        <i class="fa fa-twitter"></i>
     </button>
 </div>
 <!--Releases-->
 <div id="releases" class="container" style="display:none">
     <section>
         <fieldset>
-            <legend style="padding-top: 60px">Releases Note</legend>
+            <legend style="padding-top: 60px" i18n="title_content_releases"></legend>
             <b>Version 1.0.1 - 09 June 2015</b>
             <span class="help-block">
                 <ul>
                     <li>
-                        Changed links for extension and suport.
+                        Changed links for extension and support.
                     </li>
                 </ul>
             </span>
@@ -77,20 +77,20 @@
 <div id="contact" class="container" style="display:none">
     <section>
         <fieldset>
-            <legend style="padding-top: 60px">Create by Laisson R. Silveira</legend>
+            <legend style="padding-top: 60px" i18n="title_content_contact"></legend>
             <span class="help-block">
                 <table>
                     <tr>
                         <td><i class="fa fa-envelope"></i></td>
-                        <td style="padding-left: 5px">- laisson.r.silveira@gmail.com</td>
+                        <td style="padding-left: 5px" i18n="tab_contact_email"></td>
                     </tr>
                     <tr>
                         <td><i class="fa fa-location-arrow"></i></td>
-                        <td style="padding-left: 5px">- Brasil, Florianópolis / SC</td>
+                        <td style="padding-left: 5px" i18n="tab_contact_location"></td>
                     </tr>
                     <tr>
                         <td><i class="fa fa-globe"></i></td>
-                        <td style="padding-left: 5px">- http://technova.com.br</td>
+                        <td style="padding-left: 5px" i18n="tab_contact_site"></td>
                     </tr>
                 </table>
             </span>
@@ -105,12 +105,12 @@
             <hr>
             <div>
                 <i class="fa fa-info-circle help-block"></i>
-                <a href="http://goo.gl/gFZl3w" target="_blank">About Twitter Notification</a>
+                <a href="http://goo.gl/gFZl3w" target="_blank" i18n="tab_contact_about"></a>
             </div>
             <hr>
             <div>
                 <i class="fa fa-link help-block"></i>
-                <a href="https://goo.gl/nQEZUc" target="_blank">Send your feedback!</a>
+                <a href="https://goo.gl/nQEZUc" target="_blank" i18n="tab_contact_feedback"></a>
             </div>
             <hr>
         </fieldset>
@@ -120,7 +120,7 @@
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
         <div class="navbar-text-pull-center">
-            <a href="mailto:laisson.r.silveira@gmail.com" style="padding-left: 70px">Laisson R. Silveira - Copyright<i class="fa fa-copyright"></i> 2015</a>
+            <a href="mailto:laisson.r.silveira@gmail.com" style="padding-left: 70px" i18n="label_copyright"></a>
             <div class="pull-right">
                 <a href="https://twitter.com/laisson_rangel" target="_blank"><i class="fa fa-twitter" style="padding-left: 5px"></i></a>
                 <a href="https://www.facebook.com/laisson.r.silveira" target="_blank"><i class="fa fa-facebook" style="padding-left: 5px"></i></a>
@@ -144,28 +144,25 @@
             <td>
                 <h2></h2>
                 <div class="notify">
-                    <b>Notify for:</b>
+                    <b i18n="title_item_account"></b>
 
                     <div class="notify">
-                        <label>
+                        <label i18n="item_account_tweets">
                             <input class="notifyTweet" type="checkbox">
-                            Tweets
                         </label>
-                        <label>
+                        <label i18n="item_account_mentions">
                             <input class="notifyMention" type="checkbox">
-                            Mentions
                         </label>
-                        <label>
+                        <label i18n="item_account_messages">
                             <input class="notifyDm" type="checkbox">
-                            Messages
                         </label>
                     </div>
                 </div>
             </td>
             <td>
                 <div class="actions">
-                    <button class="btn btn-sm btn-default btn-disable">Disable</button>
-                    <button class="btn btn-sm btn-danger btn-logout" data-toggle="modal" data-target="#modalConfirmLogout">Logout</button>
+                    <button class="btn btn-sm btn-default btn-disable" i18n="button_disable"></button>
+                    <button class="btn btn-sm btn-danger btn-logout" data-toggle="modal" data-target="#modalConfirmLogout" i18n="button_logout"></button>
                 </div>
             </td>
         </tr>
@@ -180,11 +177,11 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <img src="../images/48.png"/>
-                <h4 class="modal-title">Logout this Account Twitter?</h4>
+                <h4 class="modal-title" i18n="title_modal_logout"></h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-success btn-confirm-logout" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="button_no"></button>
+                <button type="button" class="btn btn-success btn-confirm-logout" data-dismiss="modal" i18n="button_yes"></button>
             </div>
         </div>
     </div>

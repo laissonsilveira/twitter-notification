@@ -200,13 +200,13 @@ function enableAccount(component) {
 }
 
 function setVersionTitle() {
-    $(".navbar-brand").append(" " + chrome.extension.getBackgroundPage().twitter.version);
+    $(".navbar-brand").append(chrome.i18n.getMessage("name_extension") + " " + chrome.extension.getBackgroundPage().twitter.version);
 }
 
 function showWarning(message) {
     $.notify({
         icon: '/images/warning_32.png',
-        title: '<strong>Warning:</strong>',
+        title: '<strong>' + chrome.i18n.getMessage("title_msg_warning") + '</strong>',
         message: message
     }, {
         icon_type: 'image',
@@ -274,4 +274,47 @@ function showSuccess(message) {
 
 function getBackgroundAccount() {
     return chrome.extension.getBackgroundPage().accounts;
+}
+
+//Class
+function Releases() {
+    var dateRelease;
+    var changes;
+
+    this.getDateRelease = function() {
+        return this.dateRelease;
+    }
+
+    this.setDateRelease = function(_dateRelease) {
+        this.dateRelease = _dateRelease;
+    }
+
+    this.getChanges = function() {
+        return this.changes;
+    }
+
+    this.addChanges = function(_changes) {
+        this.changes = _changes;
+    }
+}
+
+function Change() {
+    var description;
+    var changes;
+
+    this.getDescription = function() {
+        return this.description;
+    }
+
+    this.setDescription = function(_description) {
+        this.description = _description;
+    }
+
+    this.getChanges = function() {
+        return this.changes;
+    }
+
+    this.addChanges = function(_changes) {
+        this.changes = _changes;
+    }
 }
