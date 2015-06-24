@@ -276,7 +276,7 @@ function getBackgroundAccount() {
     return chrome.extension.getBackgroundPage().accounts;
 }
 
-//Class
+//Class Releases
 function Releases() {
     var dateRelease;
     var changes;
@@ -298,6 +298,7 @@ function Releases() {
     }
 }
 
+//Class Change
 function Change() {
     var description;
     var changes;
