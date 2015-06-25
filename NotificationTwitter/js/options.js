@@ -1,5 +1,41 @@
+var Releases = {};
+Releases.loadReleases = function() {
+    $.getJSON("../releases_note/notes.json")
+        .done(function (json) {
+            var html = "";
+            $.each(json.releases_notes, function (index, release) {
+                html += "<b>" + release.version + " - " + release.date + "</b>";
+                html += "<span class=\"help-block\">";
+                html += "<ul>";
+                html = Releases.eachChanges(release.changes, html);
+                html += "</ul>";
+                html += "</span>";
+                html += "<hr>";
+            });
+            $("#releases_notes").append(html);
+            console.log(html);
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            showError("JSON - Releases Notes not found!");
+        });
+}
+Releases.eachChanges = function(changes, html) {
+    $.each(changes, function (index1, change) {
+        if (typeof change != 'object') {
+            html += "<li>" + change + "</li>";
+        }
+        if (change.changes) {
+            html += "<ul>";
+            html = Releases.eachChanges(change.changes, html);
+            html += "</ul>";
+        }
+    });
+    return html;
+}
+
 $(document).ready(function () {
     setVersionTitle();
+    Releases.loadReleases();
     accounts = store.get("accounts") || [];
     loadAccountsToScreen();
     setInterval(function () {
@@ -274,48 +310,4 @@ function showSuccess(message) {
 
 function getBackgroundAccount() {
     return chrome.extension.getBackgroundPage().accounts;
-}
-
-//Class Releases
-function Releases() {
-    var dateRelease;
-    var changes;
-
-    this.getDateRelease = function() {
-        return this.dateRelease;
-    }
-
-    this.setDateRelease = function(_dateRelease) {
-        this.dateRelease = _dateRelease;
-    }
-
-    this.getChanges = function() {
-        return this.changes;
-    }
-
-    this.addChanges = function(_changes) {
-        this.changes = _changes;
-    }
-}
-
-//Class Change
-function Change() {
-    var description;
-    var changes;
-
-    this.getDescription = function() {
-        return this.description;
-    }
-
-    this.setDescription = function(_description) {
-        this.description = _description;
-    }
-
-    this.getChanges = function() {
-        return this.changes;
-    }
-
-    this.addChanges = function(_changes) {
-        this.changes = _changes;
-    }
 }
