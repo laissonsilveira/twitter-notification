@@ -1,25 +1,44 @@
 var Releases = {};
-Releases.loadReleases = function() {
-    $.getJSON("../releases_note/notes.json")
-        .done(function (json) {
-            var html = "";
-            $.each(json.releases_notes, function (index, release) {
-                html += "<b>" + release.version + " - " + release.date + "</b>";
-                html += "<span class=\"help-block\">";
-                html += "<ul>";
-                html = Releases.eachChanges(release.changes, html);
-                html += "</ul>";
-                html += "</span>";
-                html += "<hr>";
-            });
-            $("#releases_notes").append(html);
-            console.log(html);
-        })
-        .fail(function (jqxhr, textStatus, error) {
-            showError("JSON - Releases Notes not found!");
+Releases.loadReleases = function () {
+    function load(json) {
+        var html = "";
+        $.each(json.releases_notes, function (index, release) {
+            html += "<b>" + release.version + " - " + release.date + "</b>";
+            html += "<span class=\"help-block\">";
+            html += "<ul>";
+            html = Releases.eachChanges(release.changes, html);
+            html += "</ul>";
+            html += "</span>";
+            html += "<hr>";
         });
+        $("#releases_notes").append(html);
+    }
+
+    function loadDefault() {
+        $.getJSON("../releases_note/en.json")
+            .done(function (json) {
+                load(json);
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                showError("JSON - Releases Notes not found!");
+            });
+    }
+
+    var uiLanguage = chrome.i18n.getUILanguage().substr(0, 2);
+    if (uiLanguage) {
+        var path = "../releases_note/"+ uiLanguage + ".json";
+        $.getJSON(path)
+            .done(function (json) {
+                load(json);
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                loadDefault();
+            });
+    } else {
+        loadDefault();
+    }
 }
-Releases.eachChanges = function(changes, html) {
+Releases.eachChanges = function (changes, html) {
     $.each(changes, function (index1, change) {
         if (typeof change != 'object') {
             html += "<li>" + change + "</li>";
