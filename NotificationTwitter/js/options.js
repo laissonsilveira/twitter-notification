@@ -12,6 +12,7 @@ Releases.loadReleases = function () {
             html += "<hr>";
         });
         $("#releases_notes").append(html);
+        chrome.extension.getBackgroundPage().logInConsole("Load releases notes.", true);
     }
 
     function loadDefault() {
@@ -20,7 +21,7 @@ Releases.loadReleases = function () {
                 load(json);
             })
             .fail(function (jqxhr, textStatus, error) {
-                showError("JSON - Releases Notes not found!");
+                showError(chrome.i18n.getMessage("msg_releases_notes_not_found"));
             });
     }
 

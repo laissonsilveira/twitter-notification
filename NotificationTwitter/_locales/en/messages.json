@@ -23,6 +23,9 @@
   "msg_account_disabled_success": {
     "message": "Account logout with success!"
   },
+  "msg_releases_notes_not_found": {
+    "message": "Releases Notes not found!"
+  },
 
   //Title
   "title_msg_success": {
@@ -39,9 +42,6 @@
   },
 
   //Navbar
-  "title_navbar": {
-    "message": "Twitter Notification"
-  },
   "menu_navbar_add_twitter": {
     "message": "Add Twitter"
   },
@@ -71,6 +71,15 @@
   "button_logout": {
     "message": "Logout"
   },
+  "button_options": {
+    "message": "Options"
+  },
+  "button_on": {
+    "message": "ON"
+  },
+  "button_off": {
+    "message": "OFF"
+  },
 
   //Tabs
   "title_content_add_twitter": {
@@ -79,6 +88,7 @@
   "title_content_releases": {
     "message": "Releases Note"
   },
+
   // Tab - Contact
   "title_content_contact": {
     "message": "Create by Laisson R. Silveira"
@@ -110,6 +120,56 @@
     "message": "Mentions"
   },
   "item_account_messages": {
+    "message": "Messages"
+  },
+
+  //Notification
+  "title_notify_error_stream_complete": {
+    "message": "Twitter Error"
+  },
+  "body_notify_error_stream_complete": {
+    "message": "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
     "message": "Messages"
   }
 

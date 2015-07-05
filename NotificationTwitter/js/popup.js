@@ -5,7 +5,7 @@ function onClickOpenOptionsButton() {
 }
 
 function setVersionTitlePopup() {
-    $(".title-nav-bar").append(" " + chrome.extension.getBackgroundPage().twitter.version);
+    $(".title-nav-bar").append(chrome.i18n.getMessage("name_extension") + " " + chrome.extension.getBackgroundPage().twitter.version);
 }
 
 function addAccountsToScreenPopup(accounts) {
@@ -16,6 +16,8 @@ function addAccountsToScreenPopup(accounts) {
             $("#accountListPopup").html('<div class="container jumbotron"><span>' + msgAccountNotFound + '</span></div>');
         } else {
             $("#accountListPopup").html("");
+            $('.on-off-account').attr("data-off-text", chrome.i18n.getMessage("button_off"));
+            $('.on-off-account').attr("data-on-text", chrome.i18n.getMessage("button_on"));
             for (var index in accounts) {
                 $("#accountPopupTemplate").clone().appendTo("#accountListPopup").attr("id", "account" + index).show();
                 $("#account" + index).find(".name-account").text("@" + accounts[index].screenName);
