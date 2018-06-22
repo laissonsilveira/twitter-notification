@@ -1,0 +1,41 @@
+{
+  "releases_notes": [
+    {
+      "version": "Version 1.1",
+      "date": "25 June 2015",
+      "changes": [
+        "Internationalization of extension.",
+        {
+          "changes": [
+            "English", "Portuguese"
+          ]
+        }
+      ]
+    },
+    {
+      "version": "Version 1.0.1",
+      "date": "09 June 2015",
+      "changes": [
+          "Changed links for extension and support."
+      ]
+    },
+    {
+      "version": "Version 1.0",
+      "date": "09 June 2015",
+      "changes": [
+        "Create extension and published beta version.",
+        {
+          "changes": [
+            "Option disable account",
+            "Option logout account",
+            "Option enable tweet account",
+            "Option enable mention account",
+            "Option enable message account",
+            "Create notification tweet account",
+            "Add option disable in popup page"
+          ]
+        }
+      ]
+    }
+  ]
+}

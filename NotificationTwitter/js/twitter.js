@@ -7,7 +7,7 @@ NotFoundError.prototype = Error.prototype;
 var twitter = {};
 var accounts = store.get("accounts") || [];
 var timeoutLoadAccount, notifyLoadAccount;
-twitter.version = "1.0.1";
+twitter.version = "1.1";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
 twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
 twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
@@ -307,9 +307,9 @@ twitter.streamComplete = function(a, b) {
                 }
                 b.stream.wait *= 2
             } else {
-                notif = new Notification("Twitter Error", {
+                notif = new Notification(chrome.i18n.getMessage("title_notify_error_stream_complete"), {
                     icon: "images/error.png",
-                    body: "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
+                    body: chrome.i18n.getMessage("body_notify_error_stream_complete")
                 });
                 setTimeout(function () {
                     b.stream = new twitter.stream(b.stream.wait);

@@ -1,0 +1,176 @@
+//chrome.i18n.getMessage("")
+{
+  "name_extension": {
+    "message": "Twitter Notification"
+  },
+  "label_copyright": {
+    "message": "Laisson R. Silveira - Copyright<i class=\"fa fa-copyright\"></i> 2015"
+  },
+  "title_page_options": {
+    "message": "Options"
+  },
+
+  // Messages
+  "msg_account_not_found": {
+    "message": "No accounts connected"
+  },
+  "msg_account_logout_success": {
+    "message": "Account logout with success!"
+  },
+  "msg_account_enabled_success": {
+    "message": "Account enabled with success!"
+  },
+  "msg_account_disabled_success": {
+    "message": "Account logout with success!"
+  },
+  "msg_releases_notes_not_found": {
+    "message": "Releases Notes not found!"
+  },
+
+  //Title
+  "title_msg_success": {
+    "message": "Sucess:"
+  },
+  "title_msg_error": {
+    "message": "Error:"
+  },
+  "title_msg_warning": {
+    "message": "Warning:"
+  },
+  "title_modal_logout": {
+    "message": "Logout this Account Twitter?"
+  },
+
+  //Navbar
+  "menu_navbar_add_twitter": {
+    "message": "Add Twitter"
+  },
+  "menu_navbar_releases": {
+    "message": "Releases"
+  },
+  "menu_navbar_contact": {
+    "message": "Contact"
+  },
+
+  //Buttons
+  "button_connect_twitter": {
+    "message": "Connect with Twitter"
+  },
+  "button_no": {
+    "message": "No"
+  },
+  "button_yes": {
+    "message": "Yes"
+  },
+  "button_enable": {
+    "message": "Enable"
+  },
+  "button_disable": {
+    "message": "Disable"
+  },
+  "button_logout": {
+    "message": "Logout"
+  },
+  "button_options": {
+    "message": "Options"
+  },
+  "button_on": {
+    "message": "ON"
+  },
+  "button_off": {
+    "message": "OFF"
+  },
+
+  //Tabs
+  "title_content_add_twitter": {
+    "message": "Active Accounts"
+  },
+  "title_content_releases": {
+    "message": "Releases Note"
+  },
+
+  // Tab - Contact
+  "title_content_contact": {
+    "message": "Create by Laisson R. Silveira"
+  },
+  "tab_contact_email": {
+    "message": "- laisson.r.silveira@gmail.com"
+  },
+  "tab_contact_location": {
+    "message": "- Brasil, Florianópolis / SC"
+  },
+  "tab_contact_site": {
+    "message": "- http://technova.com.br"
+  },
+  "tab_contact_about": {
+    "message": "About Twitter Notification"
+  },
+  "tab_contact_feedback": {
+    "message": "Send your feedback!"
+  },
+
+  //Item Account
+  "title_item_account": {
+    "message": "Notify for:"
+  },
+  "item_account_tweets": {
+    "message": "Tweets"
+  },
+  "item_account_mentions": {
+    "message": "Mentions"
+  },
+  "item_account_messages": {
+    "message": "Messages"
+  },
+
+  //Notification
+  "title_notify_error_stream_complete": {
+    "message": "Twitter Error"
+  },
+  "body_notify_error_stream_complete": {
+    "message": "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  },
+  "title_notify_": {
+    "message": "Messages"
+  },
+  "body_notify_": {
+    "message": "Messages"
+  }
+
+}

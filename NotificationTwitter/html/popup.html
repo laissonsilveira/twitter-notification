@@ -12,32 +12,31 @@
     <script type="text/javascript" src="../js/store+json2.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap-switch.min.js"></script>
     <script type="text/javascript" src="../js/popup.js"></script>
+    <script type="text/javascript" src="../js/translate-i18n.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="title-nav-bar">
         <img src="../images/32_white.png"/>
-        <a href="http://goo.gl/gFZl3w" target="_blank">Twitter Notification Beta</a>
+        <a href="http://goo.gl/gFZl3w" target="_blank"></a>
     </div>
 </nav>
 <div class="container">
-    <div class="title-popup">
-        Active Accounts
-    </div>
+    <div class="title-popup" i18n="title_content_add_twitter"></div>
     <hr>
     <section>
         <div id="accountListPopup"/>
     </section>
     <hr>
-    <button id="openOptions" class="btn btn-sm btn-social btn-twitter pull-right">
-        <i class="fa fa-gear"></i> Options
+    <button id="openOptions" class="btn btn-sm btn-social btn-twitter pull-right" i18n="button_options">
+        <i class="fa fa-gear"></i>
     </button>
 </div>
 <div id="accountPopupTemplate" class="form-control popup-template" style="display: none">
     <table>
         <tr>
             <td>
-                <input class="on-off-account" type="checkbox" data-off-text="OFF" data-on-text="ON" checked data-size="mini">
+                <input class="on-off-account" type="checkbox" checked data-size="mini">
             </td>
             <td>
                 <div class="name-account"/>

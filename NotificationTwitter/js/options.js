@@ -1,5 +1,61 @@
+var Releases = {};
+Releases.loadReleases = function () {
+    function load(json) {
+        var html = "";
+        $.each(json.releases_notes, function (index, release) {
+            html += "<b>" + release.version + " - " + release.date + "</b>";
+            html += "<span class=\"help-block\">";
+            html += "<ul>";
+            html = Releases.eachChanges(release.changes, html);
+            html += "</ul>";
+            html += "</span>";
+            html += "<hr>";
+        });
+        $("#releases_notes").append(html);
+        chrome.extension.getBackgroundPage().logInConsole("Load releases notes.", true);
+    }
+
+    function loadDefault() {
+        $.getJSON("../releases_note/en.json")
+            .done(function (json) {
+                load(json);
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                showError(chrome.i18n.getMessage("msg_releases_notes_not_found"));
+            });
+    }
+
+    var uiLanguage = chrome.i18n.getUILanguage().substr(0, 2);
+    if (uiLanguage) {
+        var path = "../releases_note/"+ uiLanguage + ".json";
+        $.getJSON(path)
+            .done(function (json) {
+                load(json);
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                loadDefault();
+            });
+    } else {
+        loadDefault();
+    }
+}
+Releases.eachChanges = function (changes, html) {
+    $.each(changes, function (index1, change) {
+        if (typeof change != 'object') {
+            html += "<li>" + change + "</li>";
+        }
+        if (change.changes) {
+            html += "<ul>";
+            html = Releases.eachChanges(change.changes, html);
+            html += "</ul>";
+        }
+    });
+    return html;
+}
+
 $(document).ready(function () {
     setVersionTitle();
+    Releases.loadReleases();
     accounts = store.get("accounts") || [];
     loadAccountsToScreen();
     setInterval(function () {
@@ -43,7 +99,8 @@ function loadAccountsToScreen() {
     $("#accountList").html("");
 
     if (accounts.length == 0) {
-        $("#accountList").html('<div class="container jumbotron account"><span>No accounts connected</span></div>');
+        var msgAccountNotFound = chrome.i18n.getMessage("msg_account_not_found");
+        $("#accountList").html('<div class="container jumbotron account"><span>' + msgAccountNotFound + '</span></div>');
     } else {
         try {
             for (var a in accounts) {
@@ -70,7 +127,7 @@ function loadAccountsToScreen() {
         $("button.btn-confirm-logout").on("click", function () {
             accounts = getBackgroundAccount();
             if (typeof componentToLogout == "undefined") {
-                var msg = "Account not found!";
+                var msg = chrome.i18n.getMessage("msg_account_not_found");
                 chrome.extension.getBackgroundPage().logInConsole(msg, false);
                 showWarning(msg);
                 return;
@@ -85,7 +142,7 @@ function loadAccountsToScreen() {
                 componentToLogout.parentNode.removeChild(componentToLogout);
                 componentToLogout == undefined;
                 loadAccountsToScreen();
-                showSuccess("Account logout with success!")
+                showSuccess(chrome.i18n.getMessage("msg_account_logout_success"))
             } catch (exception) {
                 showError(exception);
             }
@@ -177,7 +234,7 @@ function disableAccount(component) {
     buttonDisable.classList.add("btn-success");
 
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " disabled", true);
-    showSuccess("Account disabled with success!")
+    showSuccess(chrome.i18n.getMessage("msg_account_disabled_success"));
 }
 
 function enableAccount(component) {
@@ -195,17 +252,17 @@ function enableAccount(component) {
     buttonEnable.classList.add("btn-default");
 
     chrome.extension.getBackgroundPage().logInConsole(accounts[index].screenName + " enabled", true);
-    showSuccess("Account enabled with success!")
+    showSuccess(chrome.i18n.getMessage("msg_account_enabled_success"));
 }
 
 function setVersionTitle() {
-    $(".navbar-brand").append(" " + chrome.extension.getBackgroundPage().twitter.version);
+    $(".navbar-brand").append(chrome.i18n.getMessage("name_extension") + " " + chrome.extension.getBackgroundPage().twitter.version);
 }
 
 function showWarning(message) {
     $.notify({
         icon: '/images/warning_32.png',
-        title: '<strong>Warning:</strong>',
+        title: '<strong>' + chrome.i18n.getMessage("title_msg_warning") + '</strong>',
         message: message
     }, {
         icon_type: 'image',
@@ -236,7 +293,7 @@ function showError(message) {
 
     $.notify({
         icon: '/images/error_32.png',
-        title: '<strong>Error:</strong>',
+        title: '<strong>' + chrome.i18n.getMessage("title_msg_error") + '</strong>',
         message: msg
     }, {
         icon_type: 'image',
@@ -255,7 +312,7 @@ function showError(message) {
 function showSuccess(message) {
     $.notify({
         icon: '/images/32.png',
-        title: '<strong>Sucess:</strong>',
+        title: '<strong>' + chrome.i18n.getMessage("title_msg_success") + '</strong>',
         message: message
     }, {
         icon_type: 'image',
