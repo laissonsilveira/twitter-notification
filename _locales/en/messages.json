@@ -1,16 +1,10 @@
-//chrome.i18n.getMessage("")
 {
   "name_extension": {
-    "message": "Twitter Notification"
-  },
-  "label_copyright": {
-    "message": "Laisson R. Silveira - Copyright<i class=\"fa fa-copyright\"></i> 2015"
+    "message": "Twitter Notification Beta"
   },
   "title_page_options": {
     "message": "Options"
   },
-
-  // Messages
   "msg_account_not_found": {
     "message": "No accounts connected"
   },
@@ -26,8 +20,6 @@
   "msg_releases_notes_not_found": {
     "message": "Releases Notes not found!"
   },
-
-  //Title
   "title_msg_success": {
     "message": "Sucess:"
   },
@@ -40,8 +32,6 @@
   "title_modal_logout": {
     "message": "Logout this Account Twitter?"
   },
-
-  //Navbar
   "menu_navbar_add_twitter": {
     "message": "Add Twitter"
   },
@@ -51,8 +41,6 @@
   "menu_navbar_contact": {
     "message": "Contact"
   },
-
-  //Buttons
   "button_connect_twitter": {
     "message": "Connect with Twitter"
   },
@@ -80,16 +68,12 @@
   "button_off": {
     "message": "OFF"
   },
-
-  //Tabs
   "title_content_add_twitter": {
     "message": "Active Accounts"
   },
   "title_content_releases": {
     "message": "Releases Note"
   },
-
-  // Tab - Contact
   "title_content_contact": {
     "message": "Create by Laisson R. Silveira"
   },
@@ -99,17 +83,12 @@
   "tab_contact_location": {
     "message": "- Brasil, Florianópolis / SC"
   },
-  "tab_contact_site": {
-    "message": "- http://technova.com.br"
-  },
   "tab_contact_about": {
     "message": "About Twitter Notification"
   },
   "tab_contact_feedback": {
     "message": "Send your feedback!"
   },
-
-  //Item Account
   "title_item_account": {
     "message": "Notify for:"
   },
@@ -122,55 +101,10 @@
   "item_account_messages": {
     "message": "Messages"
   },
-
-  //Notification
   "title_notify_error_stream_complete": {
     "message": "Twitter Error"
   },
   "body_notify_error_stream_complete": {
     "message": "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
-  },
-  "title_notify_": {
-    "message": "Messages"
-  },
-  "body_notify_": {
-    "message": "Messages"
   }
-
 }
