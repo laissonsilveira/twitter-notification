@@ -9,8 +9,8 @@ var accounts = store.get("accounts") || [];
 var timeoutLoadAccount, notifyLoadAccount;
 twitter.version = "0.0.4";
 twitter.apiRoot = "https://api.twitter.com/1.1/";
-twitter.consumerKey = "nCcyyapPaxA1zxHYZoKElUYHt";
-twitter.consumerSecret = "R3g4yCiM3AMv1w1pLgZdnsGLHqxAjPNKTWjSEShEwlIqxxZMqB";
+twitter.consumerKey = "COLOCAR AQUI SUA KEY";
+twitter.consumerSecret = "COLOCAR AQUI SUA CHAVE SECRETA";
 twitter.setup = function () {
     for (var a in accounts) {
         if (!accounts[a].accessToken) {

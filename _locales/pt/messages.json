@@ -3,64 +3,64 @@
     "message": "Twitter Notification Beta"
   },
   "title_page_options": {
-    "message": "Options"
+    "message": "Opções"
   },
   "msg_account_not_found": {
-    "message": "No accounts connected"
+    "message": "Nenhuma conta conectada"
   },
   "msg_account_logout_success": {
-    "message": "Account logout with success!"
+    "message": "Conta desconectada com sucesso!"
   },
   "msg_account_enabled_success": {
-    "message": "Account enabled with success!"
+    "message": "Conta habilitada com sucesso!"
   },
   "msg_account_disabled_success": {
-    "message": "Account disabled with success!"
+    "message": "Conta desabilitada com sucesso!"
   },
   "msg_releases_notes_not_found": {
-    "message": "Releases Notes not found!"
+    "message": "Anotações das releases não encontrada!"
   },
   "title_msg_success": {
-    "message": "Sucess:"
+    "message": "Sucesso:"
   },
   "title_msg_error": {
-    "message": "Error:"
+    "message": "Erro:"
   },
   "title_msg_warning": {
-    "message": "Warning:"
+    "message": "Aviso:"
   },
   "title_modal_logout": {
-    "message": "Logout this Account Twitter?"
+    "message": "Desconectar conta do twitter?"
   },
   "menu_navbar_add_twitter": {
-    "message": "Add Twitter"
+    "message": "Adicionar Twitter"
   },
   "menu_navbar_releases": {
     "message": "Releases"
   },
   "menu_navbar_contact": {
-    "message": "Contact"
+    "message": "Contato"
   },
   "button_connect_twitter": {
-    "message": "Connect with Twitter"
+    "message": "Conectar com Twitter"
   },
   "button_no": {
-    "message": "No"
+    "message": "Não"
   },
   "button_yes": {
-    "message": "Yes"
+    "message": "Sim"
   },
   "button_enable": {
-    "message": "Enable"
+    "message": "Habilitar"
   },
   "button_disable": {
-    "message": "Disable"
+    "message": "Disabilitar"
   },
   "button_logout": {
-    "message": "Logout"
+    "message": "Sair"
   },
   "button_options": {
-    "message": "Options"
+    "message": "Opções"
   },
   "button_on": {
     "message": "ON"
@@ -69,13 +69,13 @@
     "message": "OFF"
   },
   "title_content_add_twitter": {
-    "message": "Active Accounts"
+    "message": "Contas ativas"
   },
   "title_content_releases": {
-    "message": "Releases Note"
+    "message": "Anotações Releases"
   },
   "title_content_contact": {
-    "message": "Create by Laisson R. Silveira"
+    "message": "Criado por Laisson R. Silveira"
   },
   "tab_contact_email": {
     "message": "- laisson.r.silveira@gmail.com"
@@ -84,13 +84,13 @@
     "message": "- Brasil, Florianópolis / SC"
   },
   "tab_contact_about": {
-    "message": "About Twitter Notification"
+    "message": "Sobre Twitter Notification Beta"
   },
   "tab_contact_feedback": {
-    "message": "Send your feedback!"
+    "message": "Enviar seu feedback!"
   },
   "title_item_account": {
-    "message": "Notify for:"
+    "message": "Notificar para:"
   },
   "item_account_tweets": {
     "message": "Tweets"
@@ -102,9 +102,9 @@
     "message": "Messages"
   },
   "title_notify_error_stream_complete": {
-    "message": "Twitter Error"
+    "message": "Erro Twitter"
   },
   "body_notify_error_stream_complete": {
-    "message": "Twitter Notification couldn't connect to Twitter - maybe Twitter's down, or maybe you aren't logged in properly. Go to the options page to logout and in again."
+    "message": "Twitter Notification beta não pode se conectar ao Twitter - talvez Twitter está fora, ou talvez você não está logado corretamente. Vá para a página de opções, desconecte sua conta e tente novamente. "
   }
 }

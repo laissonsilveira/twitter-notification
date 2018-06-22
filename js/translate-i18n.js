@@ -1,14 +1,9 @@
-$(document).ready(function () {
-    localizeI18n();
-});
+$(document).ready(() => localizeI18n());
 
-translate = function (messageID, args) {
-    return chrome.i18n.getMessage(messageID, args);
-};
+const translate = (messageID, args) => chrome.i18n.getMessage(messageID, args);
 
-localizeI18n = function () {
-    //translate a page into the users language
-    $("[i18n]").each(function () {
-        $(this).append(translate($(this).attr("i18n")));
+const localizeI18n = () => {
+    $('[i18n]').each(function () {
+        $(this).append(translate($(this).attr('i18n')));
     });
 };
